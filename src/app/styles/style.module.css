@@ -1,0 +1,27 @@
+.headerContent::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+}
+
+.headerFirstContent::before {
+	height: 60px;
+	background-color: #f5fbff;
+}
+
+.headerSecondContent::before {
+	top: 60px;
+	height: 80px;
+	background-color: #ffffff;
+}
+
+.heroContent {
+	background: url('/assets/bg/main.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 100%;
+	margin-top: 140px;
+}
