@@ -1,5 +1,5 @@
 .swiper {
-	z-index: -1 !important;
+	z-index: 0 !important;
 }
 
 .swiper .swiper-wrapper {

@@ -69,8 +69,13 @@ const hyperLinks: Pick<ContactLinks, "href" | "text">[] = [
 const Header: React.FC = () => {
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
+	function toggleMenu() {
+		setMenuOpen((prevState: boolean) => !prevState);
+		document.body.classList.toggle("lock");
+	}
+
 	return (
-		<header className='fixed top-0 left-0 w-full'>
+		<header className='fixed top-0 left-0 w-full z-10'>
 			<div className={`${style.headerContent} ${style.headerFirstContent}`}>
 				<div className='relative h-15 max-w-[1200px] flex justify-between mx-auto px-[30px] z-10'>
 					<div className='flex-header-center'>
@@ -93,7 +98,9 @@ const Header: React.FC = () => {
 					<div className='flex-header-center gap-[30px]'>
 						{contactLinks.map(({ img, alt, href, text }) => (
 							<div
-								className='flex-header-center'
+								className={`flex-header-center ${
+									alt === "email" ? "max-sm:hidden" : ""
+								}`}
 								key={href}>
 								<Image
 									src={img}
@@ -114,7 +121,7 @@ const Header: React.FC = () => {
 			<div
 				className={`${style.headerContent} ${style.headerSecondContent} header__content_bottom`}>
 				<div className='relative flex justify-between items-center max-w-[1200px] mx-auto px-[30px]'>
-					<a className="z-12">
+					<a className='z-12'>
 						<Image
 							src='/assets/iconFor/site.svg'
 							alt='icon'
@@ -125,9 +132,7 @@ const Header: React.FC = () => {
 
 					<div
 						className={`header__burger ${menuOpen ? "active" : ""} z-12`}
-						onClick={() => setMenuOpen((prevState: boolean) => !prevState)}>
-						<span></span>
-					</div>
+						onClick={toggleMenu}></div>
 
 					<nav
 						className={`nav flex justify-end items-center gap-5 w-full font-medium z-12 ${
