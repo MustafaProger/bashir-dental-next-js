@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import './components.css';
 @import './swiper.css';
+@import './media.css';

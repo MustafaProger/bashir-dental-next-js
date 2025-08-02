@@ -4,17 +4,17 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 2;
 }
 
 .headerFirstContent::before {
 	height: 60px;
 	background-color: #f5fbff;
+	z-index: 10;
 }
 
 .headerSecondContent::before {
 	top: 60px;
 	height: 80px;
 	background-color: #ffffff;
+	z-index: 11;
 }
-

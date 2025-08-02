@@ -1,3 +1,7 @@
+.swiper {
+	z-index: -1 !important;
+}
+
 .swiper .swiper-wrapper {
 	transition: all 0.5s !important;
 }

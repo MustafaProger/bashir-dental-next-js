@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import style from "../styles/module/header.module.css";
 
 import type { SocialLink, ContactLinks } from "../../types";
+import { useState } from "react";
 
 const mediaLinks: SocialLink[] = [
 	{
@@ -64,10 +67,12 @@ const hyperLinks: Pick<ContactLinks, "href" | "text">[] = [
 ];
 
 const Header: React.FC = () => {
+	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
 	return (
-		<header className='fixed top-0 left-0 w-full z-50'>
+		<header className='fixed top-0 left-0 w-full'>
 			<div className={`${style.headerContent} ${style.headerFirstContent}`}>
-				<div className='relative h-15 max-w-[1200px] flex justify-between z-4 mx-auto px-[30px]'>
+				<div className='relative h-15 max-w-[1200px] flex justify-between mx-auto px-[30px] z-10'>
 					<div className='flex-header-center'>
 						{mediaLinks.map(({ href, img, alt }) => (
 							<a
@@ -106,9 +111,10 @@ const Header: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<div className={`${style.headerContent} ${style.headerSecondContent}`}>
-				<div className='relative z-4 flex justify-between items-center max-w-[1200px] mx-auto px-[30px]'>
-					<a>
+			<div
+				className={`${style.headerContent} ${style.headerSecondContent} header__content_bottom`}>
+				<div className='relative flex justify-between items-center max-w-[1200px] mx-auto px-[30px]'>
+					<a className="z-12">
 						<Image
 							src='/assets/iconFor/site.svg'
 							alt='icon'
@@ -117,12 +123,17 @@ const Header: React.FC = () => {
 						/>
 					</a>
 
-					<div className='header__burger'>
+					<div
+						className={`header__burger ${menuOpen ? "active" : ""} z-12`}
+						onClick={() => setMenuOpen((prevState: boolean) => !prevState)}>
 						<span></span>
 					</div>
 
-					<nav className='flex justify-end items-center gap-5 w-full font-medium'>
-						<ul className='flex list-none gap-[10px]'>
+					<nav
+						className={`nav flex justify-end items-center gap-5 w-full font-medium z-12 ${
+							menuOpen ? "active" : ""
+						}`}>
+						<ul className='list flex list-none gap-[10px]'>
 							{hyperLinks.map(({ href, text }) => (
 								<li
 									className='list__item'
