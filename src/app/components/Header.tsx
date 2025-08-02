@@ -1,5 +1,5 @@
 import Image from "next/image";
-import style from "../styles//style.module.css";
+import style from "../styles/module/header.module.css";
 
 import type { SocialLink, ContactLinks } from "../../types";
 
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
 									width={25}
 									height={25}
 									loading='lazy'
-									className="hover:scale-120 transition-all duration-300"
+									className='hover:scale-120 transition-all duration-300'
 								/>
 							</a>
 						))}

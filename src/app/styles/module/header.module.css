@@ -18,10 +18,3 @@
 	background-color: #ffffff;
 }
 
-.heroContent {
-	background: url('/assets/bg/main.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 50% 100%;
-	margin-top: 140px;
-}
