@@ -2,12 +2,15 @@
 
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const slides = [
+import { SlideContent } from "@/types";
+
+const slides: SlideContent[] = [
 	{
 		title: "Миссия и цели",
 		text: `Сегодня я сосредоточен на том, чтобы каждый мой пациент уходил с уверенной улыбкой. Моё желание — сделать стоматологию доступной, понятной и комфортной. Я верю, что здоровая улыбка — это уверенность в себе и качество жизни.`,
@@ -22,8 +25,8 @@ const slides = [
 	},
 ];
 
-export default function CustomSlider() {
-	const [activeIndex, setActiveIndex] = useState(1);
+export default function Slider(): React.JSX.Element {
+	const [activeIndex, setActiveIndex] = useState<number>(1);
 
 	return (
 		<div className='relative max-w-6xl mx-auto'>
@@ -35,7 +38,7 @@ export default function CustomSlider() {
 				pagination={{
 					clickable: true,
 				}}
-				modules={[Navigation, Pagination, Scrollbar, A11y]}
+				modules={[Navigation, Pagination]}
 				onSwiper={(swiper) => {
 					swiper.slideToLoop(1);
 					setActiveIndex(1);

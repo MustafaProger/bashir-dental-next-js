@@ -1,4 +1,8 @@
 @import "tailwindcss";
-@import './components.css';
-@import './swiper.css';
-@import './media.css';
+@import "./components.css";
+@import "./swiper.css";
+@import "./burger.css";
+
+html {
+	scroll-behavior: smooth;
+}

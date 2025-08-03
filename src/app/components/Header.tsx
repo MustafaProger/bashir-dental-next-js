@@ -45,7 +45,7 @@ const hyperLinks: Pick<ContactLinks, "href" | "text">[] = [
 		text: "Главная",
 	},
 	{
-		href: "#about",
+		href: "#about-me",
 		text: "Обо мне",
 	},
 	{

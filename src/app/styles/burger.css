@@ -106,12 +106,23 @@
 	header .header__content_bottom .nav.active {
 		transform: translateY(0%);
 	}
-/* 
+
+	@keyframes fade-down {
+		0% {
+			opacity: 0;
+			transform: translateY(-250px);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
 	header .header__content_bottom .nav.active .list__item {
 		opacity: 1;
 		animation: fade-down 1s ease-in-out forwards;
 	}
-
 	header .header__content_bottom .nav.active .list .list__item:nth-child(1) {
 		animation-delay: 0.02s;
 	}
@@ -133,8 +144,8 @@
 	}
 
 	header .header__content_bottom .nav.active .list .list__item:nth-child(6) {
-		animation-delay: 2.12s;
-	} */
+		animation-delay: 0.12s;
+	}
 
 	header .header__content_bottom .nav .list {
 		display: block;
@@ -155,6 +166,7 @@
 
 	header .header__content_bottom .nav .list li a:hover {
 		color: #01b5e1;
+		transform: scale(1.1) translateX(30px);
 	}
 
 	body.lock {
