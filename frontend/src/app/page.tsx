@@ -1,7 +1,10 @@
 import Slider from "./components/Slider";
+import CompareSlider from './components/CompareSlider'
 import style from "./styles/module/hero.module.css";
 
-export default function Home(): React.JSX.Element {
+// export default function Home(): React.JSX.Element {
+
+export default function Home(){
 	return (
 		<div>
 			<section
@@ -25,6 +28,9 @@ export default function Home(): React.JSX.Element {
 					<h2 className='text-[42px] text-center font-bold'>Обо мне</h2>
 					<Slider />
 				</div>
+			</section>
+			<section className="wokrs">
+				<CompareSlider/>
 			</section>
 		</div>
 	);
