@@ -7,25 +7,13 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import { SlideContent } from "@/types";
 
-const slides: SlideContent[] = [
-	{
-		title: "Миссия и цели",
-		text: `Сегодня я сосредоточен на том, чтобы каждый мой пациент уходил с уверенной улыбкой. Моё желание — сделать стоматологию доступной, понятной и комфортной. Я верю, что здоровая улыбка — это уверенность в себе и качество жизни.`,
-	},
-	{
-		title: "Мой подход к работе",
-		text: `За время своей карьеры я понял, что каждый пациент — это индивидуальность. Моя цель — сделать визит к стоматологу комфортным и безболезненным. Я использую современные методы лечения и уделяю особое внимание безопасности.`,
-	},
-	{
-		title: "Достижения",
-		text: `С отличием окончил медицинский университет и прошел стажировку в лучших клиниках. Полученные знания позволяют мне применять самые современные методы лечения зубов, обеспечивая высокое качество и долговременные результаты.`,
-	},
-];
+type Props = {
+	slides: SlideContent[];
+};
 
-export default function Slider(): React.JSX.Element {
+const Slider: React.FC<Props> = ({ slides }) => {
 	const [activeIndex, setActiveIndex] = useState<number>(1);
 
 	return (
@@ -73,17 +61,8 @@ export default function Slider(): React.JSX.Element {
 								className={`flex flex-col p-5 rounded-4xl border-[#00AEEF] text-black sm:shadow-[0px_0px_30px_rgba(1,181,225,0.6)] transition-all duration-500 border-4  ${
 									isActive ? "opacity-100" : "opacity-30 scale-80"
 								}`}>
-								<h3
-									className={` font-bold ${
-										isActive ? "text-lg" : "text-base text-gray-400"
-									}`}>
-									{slide.title}
-								</h3>
-								<hr
-									className={`h-[3px] my-4 border-t-0 transition-all duration-500 ${
-										isActive ? "bg-[#00AEEF]" : "bg-[#D9EAF7]"
-									}`}
-								/>
+								<h3>{slide.title}</h3>
+								<hr className='h-[3px] my-4 border-t-0 transition-all duration-500 bg-[#00AEEF]' />
 								<p>{slide.text}</p>
 							</div>
 						</SwiperSlide>
@@ -92,4 +71,6 @@ export default function Slider(): React.JSX.Element {
 			</Swiper>
 		</div>
 	);
-}
+};
+
+export default Slider;

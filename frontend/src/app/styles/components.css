@@ -1,4 +1,8 @@
 @layer components {
+	.container {
+		@apply max-w-[1200px] px-[30px] py-[50px] mx-auto;
+	}
+
 	.flex-header-center {
 		@apply flex items-center gap-1;
 	}
@@ -8,10 +12,10 @@
 	}
 
 	.btn-primary {
-		@apply cursor-pointer text-white text-[16px] font-medium px-[15px] py-[15px] bg-[#01b5e1] border border-[#01b5e1] transition-all duration-400 ease-in-out hover:bg-white hover:text-[#01b5e1] rounded-4xl hover:rounded-none;
+		@apply cursor-pointer text-white text-[17px] font-medium px-[17.5px] py-[12.5px] bg-[#01b5e1] border border-[#01b5e1] transition-all duration-400 ease-in-out hover:bg-white hover:text-[#01b5e1] rounded-2xl hover:rounded-none;
 	}
 
 	.btn-secondary {
-		@apply cursor-pointer text-[white] text-[16px] font-medium px-[15px] py-[15px] border transition-all duration-400 ease-in-out rounded-4xl hover:rounded-none bg-[transparent] border-[white] hover:border-[#01b5e1] hover:bg-[#01b5e1];
+		@apply cursor-pointer text-[#01b5e1] text-[17px] font-medium px-[17.5px] py-[12.5px] border transition-all duration-400 ease-in-out rounded-2xl hover:rounded-none bg-[white] border-[white] hover:bg-[#01b5e1] hover:text-white;
 	}
 }

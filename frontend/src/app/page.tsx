@@ -1,10 +1,11 @@
 import Slider from "./components/Slider";
-import CompareSlider from './components/CompareSlider'
+import FlipCard from "./components/FlipCard";
+
 import style from "./styles/module/hero.module.css";
 
-// export default function Home(): React.JSX.Element {
+import { servicesContent, slides } from "./data/data";
 
-export default function Home(){
+export default function Home(): React.JSX.Element {
 	return (
 		<div>
 			<section
@@ -19,18 +20,28 @@ export default function Home(){
 							Профессиональные стоматологические услуги от врача с опытом,
 							включая имплантацию и протезирование на имплантатах.
 						</p>
-						<button className='btn-secondary'>Бесплатная консультация</button>
+						<a
+							href='https://wa.me/+79880246554'
+							target='_blank'
+							className='btn-secondary bg-transparent text-white hover:bg-[#01b5e1] hover:border-[#01b5e1]'>
+							Бесплатная консультация
+						</a>
 					</div>
 				</div>
 			</section>
 			<section id='about-me'>
-				<div className='max-w-[1200px] p-[30px] mx-auto'>
+				<div className='container'>
 					<h2 className='text-[42px] text-center font-bold'>Обо мне</h2>
-					<Slider />
+					<Slider slides={slides} />
 				</div>
 			</section>
-			<section className="wokrs">
-				<CompareSlider/>
+			<section
+				id='services'
+				className='bg-[#F8F9FA] text-center'>
+				<div className='container'>
+					<h2 className='text-[42px] font-bold mb-10'>Мои услуги</h2>
+					<FlipCard servicesContent={servicesContent} />
+				</div>
 			</section>
 		</div>
 	);

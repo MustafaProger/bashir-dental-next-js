@@ -4,6 +4,7 @@
 		position: relative;
 		width: 25px;
 		height: 15px;
+		cursor: pointer;
 	}
 
 	.header__burger:before,

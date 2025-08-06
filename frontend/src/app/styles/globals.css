@@ -2,7 +2,18 @@
 @import "./components.css";
 @import "./swiper.css";
 @import "./burger.css";
+@import './media.css';
 
 html {
 	scroll-behavior: smooth;
+}
+
+p {
+	font-size: 17px;
+	line-height: 25px;
+}
+
+h3 {
+	font-size: 21.25px;
+	font-weight: 600;
 }

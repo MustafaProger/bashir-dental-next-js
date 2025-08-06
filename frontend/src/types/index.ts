@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type SocialLink = {
 	href: string;
 	img: string;
@@ -16,4 +18,12 @@ export type Work = {
 	beforeImage: { url: string }[];
 	afterImage: { url: string }[];
 	date: string;
+};
+
+export type ServicesContent = {
+	title: string;
+	frontText: string;
+	backText: string;
+	img: StaticImageData;
+	alt: string;
 };
