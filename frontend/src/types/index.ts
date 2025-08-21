@@ -13,33 +13,25 @@ export type SlideContent = {
 
 export type ContactLink = MedialLink & { text: string };
 
-export type Work = {
+export type WorkImage = {
 	id: number;
-	beforeImage: { 
-		id: number;
-		url: string;
-		formats?: {
-			thumbnail?: { url: string };
-			small?: { url: string };
-			medium?: { url: string };
-			large?: { url: string };
-		};
-	}[];
-	afterImage: { 
-		id: number;
-		url: string;
-		formats?: {
-			thumbnail?: { url: string };
-			small?: { url: string };
-			medium?: { url: string };
-			large?: { url: string };
-		};
-	}[];
-	beforeImagePosition?: string;
-	afterImagePosition?: string;
-	beforeImageScale?: number;
-	afterImageScale?: number;
-	date?: string;
+	url: string;
+	formats: {
+		thumbnail: { url: string };
+		small: { url: string };
+		medium: { url: string };
+		large: { url: string };
+	};
+};
+
+export type WorkItem = {
+	id: number;
+	beforeImage: WorkImage[];
+	afterImage: WorkImage[];
+};
+
+export type WorksResponse = {
+	data: WorkItem[];
 };
 
 export type ServicesContent = {

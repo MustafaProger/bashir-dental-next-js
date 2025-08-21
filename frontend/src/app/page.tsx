@@ -43,12 +43,11 @@ export default function Home(): React.JSX.Element {
 					<h2 className='title_h2'>Мои услуги</h2>
 					<FlipCard servicesContent={servicesContent} />
 				</div>
-			</section>
-
+			</section> 
 			<section id="works">
 				<div className="container">
-					{/* <h2 className="title_h2">Работы</h2> */}
-					<CompareSlider/>
+					<h2 className="title_h2">Мои работы</h2>
+					<CompareSlider />
 				</div>
 			</section>
 		</div>
