@@ -35,6 +35,22 @@
         "videos",
         "audios"
       ]
+    },
+    "beforeImagePosition": {
+      "type": "string",
+      "default": "center 25%"
+    },
+    "afterImagePosition": {
+      "type": "string",
+      "default": "center 25%"
+    },
+    "beforeImageScale": {
+      "type": "decimal",
+      "default": 1.15
+    },
+    "afterImageScale": {
+      "type": "decimal",
+      "default": 1.15
     }
   }
 }

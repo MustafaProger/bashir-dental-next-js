@@ -1,0 +1,144 @@
+.compare-slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.compare-slider-before,
+.compare-slider-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.05);
+  transform-origin: center center;
+}
+
+.compare-slider-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.compare-slider-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: white;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.compare-slider-thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background: #06b6d4;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.compare-slider-thumb:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.compare-slider-thumb.active {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.compare-slider-range {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 4;
+}
+
+/* Улучшенное выравнивание для стоматологических изображений */
+.dental-image-alignment {
+  object-position: center 25% !important;
+  transform: scale(1.15) !important;
+  transform-origin: center 25% !important;
+}
+
+/* Специальное выравнивание для изображений "до" */
+.dental-image-before {
+  object-position: center 25% !important;
+  transform: scale(1.15) !important;
+  transform-origin: center 25% !important;
+}
+
+/* Специальное выравнивание для изображений "после" */
+.dental-image-after {
+  object-position: center 25% !important;
+  transform: scale(1.15) !important;
+  transform-origin: center 25% !important;
+}
+
+/* Дополнительные стили для лучшего отображения */
+.compare-slider-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.1) 50%, transparent 51%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Улучшенное выравнивание для стоматологических изображений */
+.compare-slider-before,
+.compare-slider-after {
+  object-fit: cover !important;
+  object-position: center 25% !important;
+  transform: scale(1.15) !important;
+  transform-origin: center 25% !important;
+  transition: all 0.3s ease;
+}
+
+/* Специальные настройки для разных типов изображений */
+.compare-slider-before {
+  filter: brightness(0.95) contrast(1.05);
+}
+
+.compare-slider-after {
+  filter: brightness(1.05) contrast(1.1);
+}
+
+/* Улучшенная линия разделения */
+.compare-slider-line {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, transparent, white, transparent);
+}
+
+/* Улучшенный ползунок */
+.compare-slider-thumb {
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}

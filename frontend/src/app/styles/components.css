@@ -3,6 +3,10 @@
 		@apply max-w-[1200px] px-[30px] py-[50px] mx-auto;
 	}
 
+	.title_h2 {
+		@apply text-[42px] text-center font-bold  mb-10
+	}
+
 	.flex-header-center {
 		@apply flex items-center gap-1;
 	}

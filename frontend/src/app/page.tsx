@@ -3,7 +3,8 @@ import FlipCard from "./components/FlipCard";
 
 import style from "./styles/module/hero.module.css";
 
-import { servicesContent, slides } from "./data/data";
+import { servicesContent, slidesContent } from "./data/data";
+import CompareSlider from "./components/CompareSlider";
 
 export default function Home(): React.JSX.Element {
 	return (
@@ -31,16 +32,23 @@ export default function Home(): React.JSX.Element {
 			</section>
 			<section id='about-me'>
 				<div className='container'>
-					<h2 className='text-[42px] text-center font-bold'>Обо мне</h2>
-					<Slider slides={slides} />
+					<h2 className='title_h2 mb-0'>Обо мне</h2>
+					<Slider slides={slidesContent} />
 				</div>
 			</section>
 			<section
 				id='services'
 				className='bg-[#F8F9FA] text-center'>
 				<div className='container'>
-					<h2 className='text-[42px] font-bold mb-10'>Мои услуги</h2>
+					<h2 className='title_h2'>Мои услуги</h2>
 					<FlipCard servicesContent={servicesContent} />
+				</div>
+			</section>
+
+			<section id="works">
+				<div className="container">
+					{/* <h2 className="title_h2">Работы</h2> */}
+					<CompareSlider/>
 				</div>
 			</section>
 		</div>

@@ -1,6 +1,6 @@
 import type {
-	SocialLink,
-	ContactLinks,
+	MedialLink,
+	ContactLink,
 	SlideContent,
 	ServicesContent,
 } from "../../types";
@@ -9,7 +9,7 @@ import screw from "../../../public/assets/services/screw.png";
 import royalty from "../../../public/assets/services/royalty.png";
 import tooth from "../../../public/assets/services/tooth.png";
 
-export const mediaLinks: SocialLink[] = [
+export const mediaLinks: MedialLink[] = [
 	{
 		href: "https://www.instagram.com/dr_bashirkurban0v?igsh=MTd5Z3B5cDZ3ZzZyMA==",
 		img: "/assets/media/instagram.svg",
@@ -27,7 +27,7 @@ export const mediaLinks: SocialLink[] = [
 	},
 ];
 
-export const contactLinks: ContactLinks[] = [
+export const contactLinks: ContactLink[] = [
 	{
 		href: "mailto:kirov.aleks.1998@yandex.ru",
 		alt: "email",
@@ -42,7 +42,7 @@ export const contactLinks: ContactLinks[] = [
 	},
 ];
 
-export const hyperLinks: Pick<ContactLinks, "href" | "text">[] = [
+export const hyperLinks: Pick<ContactLink, "href" | "text">[] = [
 	{
 		href: "#hero",
 		text: "Главная",
@@ -69,7 +69,7 @@ export const hyperLinks: Pick<ContactLinks, "href" | "text">[] = [
 	},
 ];
 
-export const slides: SlideContent[] = [
+export const slidesContent: SlideContent[] = [
 	{
 		title: "Миссия и цели",
 		text: `Сегодня я сосредоточен на том, чтобы каждый мой пациент уходил с уверенной улыбкой. Моё желание — сделать стоматологию доступной, понятной и комфортной. Я верю, что здоровая улыбка — это уверенность в себе и качество жизни.`,

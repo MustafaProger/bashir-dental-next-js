@@ -426,11 +426,19 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
       true
     > &
       Schema.Attribute.Required;
+    afterImagePosition: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'center 25%'>;
+    afterImageScale: Schema.Attribute.Decimal &
+      Schema.Attribute.DefaultTo<1.15>;
     beforeImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     > &
       Schema.Attribute.Required;
+    beforeImagePosition: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'center 25%'>;
+    beforeImageScale: Schema.Attribute.Decimal &
+      Schema.Attribute.DefaultTo<1.15>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
