@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Work } from "@/types";
 import { getWorks } from "@/services/works";
 import Image from "next/image";
-import "../styles/compare-slider.css";
 
 export default function CompareSlider() {
 	const [works, setWorks] = useState<Work[] | undefined>(undefined);
