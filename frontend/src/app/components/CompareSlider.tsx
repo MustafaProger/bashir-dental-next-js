@@ -1,21 +1,41 @@
 "use client";
 import { getWorks } from "@/services/works";
-import { WorkItem, WorksResponse } from "@/types";
+import { Pagination, WorkItem, WorksResponse } from "@/types";
 import { useRef, useEffect, useState } from "react";
 
 export default function CompareSlider() {
 	const [works, setWorks] = useState<WorkItem[]>([]);
 	const [loading, setLoading] = useState(true);
+	const [loadingMore, setLoadingMore] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [pagination, setPagination] = useState<Pagination | null>(null);
 	const sliderRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const apiUrl = "http://localhost:1337";
+
+	const loadMoreWorks = async () => {
+		if (!pagination || pagination.page >= pagination.pageCount) return;
+
+		try {
+			setLoadingMore(true);
+			const nextPage = pagination.page + 1;
+			const worksData = await getWorks(apiUrl, nextPage, 3);
+
+			setWorks((prevWorks) => [...prevWorks, ...worksData.data]);
+			setPagination(worksData.meta.pagination);
+		} catch (err) {
+			setError(err instanceof Error ? err.message : "Неизвестная ошибка");
+		} finally {
+			setLoadingMore(false);
+		}
+	};
 
 	useEffect(() => {
 		const loadWorks = async () => {
 			try {
 				setLoading(true);
-				const worksData = await getWorks(apiUrl);
+				const worksData = await getWorks(apiUrl, 1, 3);
 				setWorks(worksData.data);
+				setPagination(worksData.meta.pagination);
 			} catch (err) {
 				setError(err instanceof Error ? err.message : "Неизвестная ошибка");
 			} finally {
@@ -198,8 +218,23 @@ export default function CompareSlider() {
 					</div>
 				)}
 			</div>
-			{works && works?.length !== 0 && (
-				<button className='mt-8 px-6 btn-primary'>Загрузить еще работы</button>
+
+			{pagination && pagination.page < pagination.pageCount && (
+				<div className='mt-8 flex justify-center'>
+					<button
+						onClick={loadMoreWorks}
+						disabled={loadingMore}
+						className='px-6 btn-primary disabled:opacity-50 disabled:cursor-not-allowed'>
+						{loadingMore ? (
+							<div className='flex items-center'>
+								<div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2'></div>
+								Загрузка...
+							</div>
+						) : (
+							"Загрузить еще работы"
+						)}
+					</button>
+				</div>
 			)}
 		</div>
 	);
