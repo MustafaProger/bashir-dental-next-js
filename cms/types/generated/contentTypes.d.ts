@@ -413,7 +413,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiWorkWork extends Struct.CollectionTypeSchema {
   collectionName: 'works';
   info: {
-    displayName: 'Work';
+    displayName: 'Works';
     pluralName: 'works';
     singularName: 'work';
   };
@@ -434,7 +434,6 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::work.work'> &
       Schema.Attribute.Private;

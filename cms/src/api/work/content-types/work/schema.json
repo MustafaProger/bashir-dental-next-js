@@ -4,16 +4,13 @@
   "info": {
     "singularName": "work",
     "pluralName": "works",
-    "displayName": "Work"
+    "displayName": "Works"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "date": {
-      "type": "datetime"
-    },
     "beforeImage": {
       "type": "media",
       "multiple": true,
