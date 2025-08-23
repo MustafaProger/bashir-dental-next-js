@@ -31,8 +31,6 @@ input[type="range"]::-ms-thumb {
 	cursor: pointer;
 }
 
-.active-thumb {
-	transform: scale(0.70);
-	opacity: 0.5;
-	transition: transform 0.3s;
+body.lock {
+	overflow: hidden;
 }

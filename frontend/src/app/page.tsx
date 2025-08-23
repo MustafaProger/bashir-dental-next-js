@@ -30,7 +30,9 @@ export default function Home(): React.JSX.Element {
 					</div>
 				</div>
 			</section>
-			<section id='about-me'>
+			<section
+				id='about-me'
+				className='scroll-mt-[140px]'>
 				<div className='container'>
 					<h2 className='title_h2 mb-0'>Обо мне</h2>
 					<Slider slides={slidesContent} />
@@ -38,15 +40,17 @@ export default function Home(): React.JSX.Element {
 			</section>
 			<section
 				id='services'
-				className='bg-[#F8F9FA] text-center'>
+				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
 				<div className='container'>
 					<h2 className='title_h2'>Мои услуги</h2>
 					<FlipCard servicesContent={servicesContent} />
 				</div>
-			</section> 
-			<section id="works">
-				<div className="container">
-					<h2 className="title_h2">Мои работы</h2>
+			</section>
+			<section
+				id='works'
+				className='scroll-mt-[140px]'>
+				<div className='container'>
+					<h2 className='title_h2'>Мои работы</h2>
 					<CompareSlider />
 				</div>
 			</section>
