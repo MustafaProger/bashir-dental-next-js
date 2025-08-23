@@ -48,3 +48,12 @@ export type Pagination = {
 	pageCount: number;
 	total: number;
 };
+
+export type Feedback = {
+	id: number;
+	name: string;
+	date: string;
+	rating: number;
+	isLong: boolean;
+	review: string;
+};

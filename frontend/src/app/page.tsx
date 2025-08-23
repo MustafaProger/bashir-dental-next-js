@@ -3,8 +3,9 @@ import FlipCard from "./components/FlipCard";
 
 import style from "./styles/module/hero.module.css";
 
-import { servicesContent, slidesContent } from "./data/data";
+import { feedbackContent, servicesContent, slidesContent } from "./data/data";
 import CompareSlider from "./components/CompareSlider";
+import { FeedbackCard } from "./components/FeedbackCard";
 
 export default function Home(): React.JSX.Element {
 	return (
@@ -42,7 +43,7 @@ export default function Home(): React.JSX.Element {
 				id='services'
 				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
 				<div className='container'>
-					<h2 className='title_h2'>Мои услуги</h2>
+					<h2 className='title_h2'>Услуги</h2>
 					<FlipCard servicesContent={servicesContent} />
 				</div>
 			</section>
@@ -50,8 +51,17 @@ export default function Home(): React.JSX.Element {
 				id='works'
 				className='scroll-mt-[140px]'>
 				<div className='container'>
-					<h2 className='title_h2'>Мои работы</h2>
+					<h2 className='title_h2'>Работы</h2>
 					<CompareSlider />
+				</div>
+			</section>
+
+			<section
+				id='feedback'
+				className='scroll-mt-[140px] bg-[#F8F9FA]'>
+				<div className='container'>
+					<h2 className='title_h2'>Отзывы</h2>
+					<FeedbackCard feedbacks={feedbackContent} />
 				</div>
 			</section>
 		</div>
