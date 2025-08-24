@@ -1,13 +1,9 @@
 "use client";
 import Image from "next/image";
 import { contactLinks, hyperLinks, mediaLinks } from "../../data/data";
+import type { HeaderMobileMenu } from "@/types";
 
-interface HeaderMobileMenuProps {
-	menuOpen: boolean;
-	toggleMenu: () => void;
-}
-
-const HeaderMobileMenu: React.FC<HeaderMobileMenuProps> = ({
+const HeaderMobileMenu: React.FC<HeaderMobileMenu> = ({
 	menuOpen,
 	toggleMenu,
 }) => {

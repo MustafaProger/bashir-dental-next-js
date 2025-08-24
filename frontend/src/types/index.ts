@@ -73,3 +73,15 @@ export type CompareSlider = {
 	apiUrl: string;
 	onLoadMore: () => void;
 };
+
+export type HeaderMobileMenu = {
+	menuOpen: boolean;
+	toggleMenu: () => void;
+};
+
+export type Header = {
+	menuOpen: boolean;
+	isScrolled: boolean;
+	scrollProgress: number;
+	toggleMenu: () => void;
+};

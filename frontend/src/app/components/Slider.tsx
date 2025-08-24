@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { SlideContent } from "@/types";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { SlideContent } from "@/types";
 
 type Props = {
 	slides: SlideContent[];

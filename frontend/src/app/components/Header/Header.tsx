@@ -2,15 +2,9 @@
 import Image from "next/image";
 import { contactLinks, hyperLinks, mediaLinks } from "../../data/data";
 import HeaderMobileMenu from "./HeaderMobileMenu";
+import type { Header } from "@/types";
 
-interface HeaderProps {
-	menuOpen: boolean;
-	isScrolled: boolean;
-	scrollProgress: number;
-	toggleMenu: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({
+const Header: React.FC<Header> = ({
 	menuOpen,
 	isScrolled,
 	scrollProgress,
