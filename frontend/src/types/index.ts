@@ -57,3 +57,19 @@ export type Feedback = {
 	isLong: boolean;
 	review: string;
 };
+
+export type CompareSliderItem = {
+	work: WorkItem;
+	apiUrl: string;
+	index: number;
+};
+
+export type CompareSlider = {
+	works: WorkItem[];
+	loading: boolean;
+	loadingMore: boolean;
+	error: string | null;
+	pagination: Pagination | null;
+	apiUrl: string;
+	onLoadMore: () => void;
+};
