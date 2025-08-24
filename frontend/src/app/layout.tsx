@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
-import Header from "./components/Header";
 
 import { montserrat } from "./ui/fonts";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 export const metadata: Metadata = {
 	title: "Стоматолог Башир – Качественное лечение и уход за улыбкой",
@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html>
 			<body className={`${montserrat.className} antialiased`}>
-				<Header />
+				<HeaderContainer />
 				{children}
 			</body>
 		</html>

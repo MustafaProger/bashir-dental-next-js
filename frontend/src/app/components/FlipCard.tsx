@@ -6,13 +6,11 @@ import Image from "next/image";
 import { ServicesContent } from "@/types";
 
 type Props = {
-	servicesContent: ServicesContent[];
+	services: ServicesContent[];
 };
 
-const FlipCard = ({ servicesContent }: Props) => {
-	const [flipped, setFlipped] = useState(
-		Array(servicesContent.length).fill(false)
-	);
+const FlipCard = ({ services }: Props) => {
+	const [flipped, setFlipped] = useState(Array(services.length).fill(false));
 
 	const handleFlip = (index: number) => {
 		setFlipped((prev) => prev.map((item, i) => (i === index ? !item : item)));
@@ -20,7 +18,7 @@ const FlipCard = ({ servicesContent }: Props) => {
 
 	return (
 		<div className='flex flex-wrap justify-center gap-6'>
-			{servicesContent.map((service: ServicesContent, index: number) => (
+			{services.map((service: ServicesContent, index: number) => (
 				<div
 					key={index}
 					className={`[perspective:1000px] min-w-[360px] min-h-[360px]`}>

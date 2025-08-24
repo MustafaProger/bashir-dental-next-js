@@ -44,7 +44,7 @@ export default function Home(): React.JSX.Element {
 				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
 				<div className='container'>
 					<h2 className='title_h2'>Услуги</h2>
-					<FlipCard servicesContent={servicesContent} />
+					<FlipCard services={servicesContent} />
 				</div>
 			</section>
 			<section
