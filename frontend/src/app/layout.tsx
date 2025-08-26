@@ -3,6 +3,7 @@ import "./styles/globals.css";
 
 import { montserrat } from "./ui/fonts";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
 	title: "Стоматолог Башир – Качественное лечение и уход за улыбкой",
@@ -21,8 +22,10 @@ export default function RootLayout({
 	return (
 		<html>
 			<body className={`${montserrat.className} antialiased`}>
-				<HeaderContainer />
-				{children}
+				<Providers>
+					<HeaderContainer />
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);

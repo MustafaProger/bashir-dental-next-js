@@ -1,59 +1,45 @@
 "use client";
-import { getWorks } from "@/services/works";
-import { Pagination, WorkItem } from "@/types";
-import { useState, useEffect } from "react";
+
+import { useInfiniteQuery } from "@tanstack/react-query";
 import CompareSlider from "./CompareSlider";
+import { getWorks } from "@/services/works";
+import type { WorkItem, Pagination } from "@/types";
+
+const BASE_URL = "http://localhost:1337";
+const PAGE_SIZE = 3;
 
 export default function CompareSliderContainer() {
-	const [works, setWorks] = useState<WorkItem[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [loadingMore, setLoadingMore] = useState(false);
-	const [error, setError] = useState<string | null>(null);
-	const [pagination, setPagination] = useState<Pagination | null>(null);
-	const apiUrl = "http://localhost:1337";
+	// грузим постранично, накапливая
+	const q = useInfiniteQuery({
+		queryKey: ["works", { pageSize: PAGE_SIZE }],
+		queryFn: ({ pageParam = 1, signal }) =>
+			getWorks(BASE_URL, pageParam, PAGE_SIZE, { signal }),
+		initialPageParam: 1,
+		getNextPageParam: (lastPage) => {
+			const p = lastPage?.meta?.pagination;
+			if (!p) return undefined;
+			return p.page < p.pageCount ? p.page + 1 : undefined;
+		},
+		staleTime: 5 * 60 * 1000,
+	});
 
-	const loadMoreWorks = async () => {
-		if (!pagination || pagination.page >= pagination.pageCount) return;
+	// плоский список работ
+	const works: WorkItem[] =
+		q.data?.pages.flatMap((pg: any) => pg?.data ?? []) ?? [];
 
-		try {
-			setLoadingMore(true);
-			const nextPage = pagination.page + 1;
-			const worksData = await getWorks(apiUrl, nextPage, 3);
-			setWorks((prevWorks) => [...prevWorks, ...worksData.data]);
-			setPagination(worksData.meta.pagination);
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Неизвестная ошибка");
-		} finally {
-			setLoadingMore(false);
-		}
-	};
-
-	useEffect(() => {
-		const loadWorks = async () => {
-			try {
-				setLoading(true);
-				const worksData = await getWorks(apiUrl, 1, 3);
-				setWorks(worksData.data);
-				setPagination(worksData.meta.pagination);
-			} catch (err) {
-				setError(err instanceof Error ? err.message : "Неизвестная ошибка");
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		loadWorks();
-	}, [apiUrl]);
+	// текущая пагинация (из последней страницы)
+	const pagination: Pagination | null =
+		q.data?.pages.at(-1)?.meta?.pagination ?? null;
 
 	return (
 		<CompareSlider
 			works={works}
-			loading={loading}
-			loadingMore={loadingMore}
-			error={error}
+			loading={q.isPending} // первичная загрузка
+			loadingMore={q.isFetchingNextPage} // загрузка "ещё"
+			error={q.isError ? (q.error as Error).message : null}
 			pagination={pagination}
-			apiUrl={apiUrl}
-			onLoadMore={loadMoreWorks}
+			apiUrl={BASE_URL}
+			onLoadMore={() => q.fetchNextPage()} // твоя кнопка "Загрузить ещё"
 		/>
 	);
 }

@@ -32,6 +32,9 @@ export type WorkItem = {
 
 export type WorksResponse = {
 	data: WorkItem[];
+	meta: {
+		pagination: Pagination;
+	};
 };
 
 export type ServicesContent = {
