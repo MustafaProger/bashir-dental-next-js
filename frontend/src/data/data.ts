@@ -3,11 +3,11 @@ import type {
 	ContactLink,
 	SlideContent,
 	ServicesContent,
-} from "../../types";
+} from "../types";
 
-import screw from "../../../public/assets/services/screw.png";
-import royalty from "../../../public/assets/services/royalty.png";
-import tooth from "../../../public/assets/services/tooth.png";
+import screw from "../../public/assets/services/screw.png";
+import royalty from "../../public/assets/services/royalty.png";
+import tooth from "../../public/assets/services/tooth.png";
 
 export const mediaLinks: MedialLink[] = [
 	{

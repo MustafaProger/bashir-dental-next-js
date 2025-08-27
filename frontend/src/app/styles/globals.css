@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "./components.css";
-@import "./swiper.css";
+@import "./vendors/swiper.css";
 @import "./burger.css";
 @import "./media.css";
 

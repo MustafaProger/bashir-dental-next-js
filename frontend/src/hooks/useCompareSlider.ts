@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getWorks } from "@/services/works";
+import { getWorks } from "@/services/works.api";
 import { Pagination, WorkItem } from "@/types";
 
 export const useCompareSlider = () => {

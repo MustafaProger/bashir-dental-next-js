@@ -2,7 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import CompareSlider from "./CompareSlider";
-import { getWorks } from "@/services/works";
+import { getWorks } from "@/services/works.api";
 import type { WorkItem, Pagination } from "@/types";
 
 const BASE_URL = "http://localhost:1337";

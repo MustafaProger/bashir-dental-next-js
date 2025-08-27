@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 
 import { montserrat } from "./ui/fonts";
-import HeaderContainer from "./components/Header/HeaderContainer";
+import HeaderContainer from "../components/Header/HeaderContainer";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
