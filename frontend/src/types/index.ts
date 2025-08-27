@@ -54,10 +54,9 @@ export type Pagination = {
 
 export type Feedback = {
 	id: number;
+	createdAt: string;
 	name: string;
-	date: string;
 	rating: number;
-	isLong: boolean;
 	review: string;
 };
 

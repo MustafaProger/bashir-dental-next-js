@@ -1,11 +1,12 @@
 import { feedbackContent, servicesContent, slidesContent } from "../data/data";
 import CompareSlider from "../components/CompareSlider/CompareSlider";
-import FeedbackCard from "../components/FeedbackCard";
+import FeedbackCard from "../components/FeedbackCard/FeedbackCard";
 import Slider from "../components/Slider";
 import FlipCard from "../components/FlipCard";
 
 import style from "./styles/module/hero.module.css";
 import CompareSliderContainer from "../components/CompareSlider/CompareSliderContainer";
+import FeedbackCardContainer from "@/components/FeedbackCard/FeedbackCardContainer";
 
 export default function Home(): React.JSX.Element {
 	return (
@@ -61,22 +62,7 @@ export default function Home(): React.JSX.Element {
 				className='scroll-mt-[140px]'>
 				<div className='container'>
 					<h2 className='title_h2'>Отзывы</h2>
-					<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto'>
-						{feedbackContent.map((review) => (
-							<div
-								key={review.id}
-								className='relative'>
-								<FeedbackCard
-									id={review.id}
-									name={review.name}
-									date={review.date}
-									rating={review.rating}
-									review={review.review}
-									isLong={review.isLong}
-								/>
-							</div>
-						))}
-					</div>
+					<FeedbackCardContainer />
 				</div>
 			</section>
 		</div>

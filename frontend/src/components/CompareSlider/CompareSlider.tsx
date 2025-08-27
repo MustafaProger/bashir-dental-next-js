@@ -1,5 +1,7 @@
 import type { CompareSlider } from "@/types";
 import CompareSliderItem from "./CompareSliderItem";
+import Loading from "../Loading";
+import ErrorMessage from "../ErrorMessage";
 
 export default function CompareSlider({
 	works,
@@ -11,19 +13,11 @@ export default function CompareSlider({
 	onLoadMore,
 }: CompareSlider) {
 	if (loading) {
-		return (
-			<div className='flex justify-center items-center py-20'>
-				<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500'></div>
-			</div>
-		);
+		return <Loading />;
 	}
 
 	if (error) {
-		return (
-			<div className='flex justify-center items-center h-64'>
-				<p className='text-red-500'>Ошибка: {error}</p>
-			</div>
-		);
+		return <ErrorMessage />;
 	}
 
 	return (
