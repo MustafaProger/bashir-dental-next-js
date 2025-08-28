@@ -7,7 +7,7 @@ import FeedbackCard from "./FeedbackCard";
 import Loading from "../Loading";
 import ErrorMessage from "../ErrorMessage";
 import { Feedback } from "@/types";
-import FeedbackWrite from "./FeedbackAverageWriteContainer";
+import FeedbackAverageWriteContainer from "./FeedbackAverageWriteContainer";
 
 const FeedbackContainer = (): JSX.Element => {
 	const { isPending, isError, data, error } = useQuery({
@@ -34,9 +34,9 @@ const FeedbackContainer = (): JSX.Element => {
 	if (isError) return <ErrorMessage />;
 
 	return (
-		<div className='space-y-6 max-w-[1200px] mx-auto'>
+		<div className='space-y-6 mx-auto'>
 			{/* Сводка + CTA */}
-			<FeedbackWrite
+			<FeedbackAverageWriteContainer
 				items={items}
 				ctaHref='/feedbacks/new'
 			/>

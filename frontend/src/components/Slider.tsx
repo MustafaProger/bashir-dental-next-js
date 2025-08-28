@@ -17,7 +17,7 @@ const Slider: React.FC<Props> = ({ slides }) => {
 	const [activeIndex, setActiveIndex] = useState<number>(1);
 
 	return (
-		<div className='relative max-w-6xl mx-auto'>
+		<div className='relative mx-auto'>
 			<Swiper
 				slidesPerView={1}
 				centeredSlides
@@ -35,11 +35,9 @@ const Slider: React.FC<Props> = ({ slides }) => {
 					setActiveIndex(swiper.realIndex);
 				}}
 				breakpoints={{
-					1200: {
-						slidesPerView: 3,
-					},
+
 					1024: {
-						slidesPerView: 2,
+						slidesPerView: 3,
 					},
 
 					768: {

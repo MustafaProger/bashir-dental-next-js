@@ -14,15 +14,13 @@ function pluralizeReviews(n: number) {
 	return "отзывов";
 }
 
-export default function FeedbackWrite({
+export default function FeedbackAverageWriteContainer({
 	items,
 	ctaHref,
-	onCtaClick,
 }: {
 	items: ReviewItem[];
 	className?: string;
 	ctaHref?: string; // например: "/reviews/new"
-	onCtaClick?: () => void;
 }) {
 	const total = items?.length ?? 0;
 
@@ -36,8 +34,7 @@ export default function FeedbackWrite({
 		<div
 			className={`w-full bg-white rounded-2xl border border-none pb-[20px]`}
 			aria-label='Отзывы — сводка и добавление'>
-
-			<div className='grid grid-cols-1 min-[1080px]:grid-cols-2 gap-4 sm:gap-6'>
+			<div className='grid grid-cols-1 min-[900px]:grid-cols-2 gap-4 sm:gap-6'>
 				{/* Левый блок: средняя оценка */}
 				<div className='flex items-center gap-5 rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6'>
 					<FeedbackAverage
@@ -60,21 +57,12 @@ export default function FeedbackWrite({
 								Поделитесь впечатлениями — это помогает другим пациентам.
 							</p>
 							<div className='mt-4'>
-								{ctaHref ? (
-									<a
-										href={ctaHref}
-										className='inline-flex items-center gap-2 btn-primary'>
-										<MessageSquarePlus size={18} />
-										Написать отзыв
-									</a>
-								) : (
-									<button
-										onClick={onCtaClick}
-										className='btn-primary'>
-										<MessageSquarePlus size={18} />
-										Написать отзыв
-									</button>
-								)}
+								<a
+									href={ctaHref}
+									className='inline-flex items-center gap-2 btn-primary'>
+									<MessageSquarePlus size={18} />
+									Написать отзыв
+								</a>
 							</div>
 						</div>
 					</div>

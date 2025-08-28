@@ -53,7 +53,7 @@
 	background-color: #01b5e1;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
 	.swiper .swiper-button-prev {
 		left: 20%;
 	}

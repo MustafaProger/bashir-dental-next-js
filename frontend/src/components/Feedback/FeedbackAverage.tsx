@@ -7,11 +7,9 @@ type Item = { rating: number };
 export default function FeedbackAverage({
 	avg,
 	items,
-	className = "",
 }: {
 	avg: number;
 	items?: Item[]; // если передашь — покажем разбивку 5..1
-	className?: string;
 }) {
 	const size = 140;
 	const stroke = 10;
@@ -34,9 +32,9 @@ export default function FeedbackAverage({
 	}, [items]);
 
 	return (
-		<div className={`w-full flex items-center gap-5 sm:gap-6 ${className}`}>
+		<div className={`w-full flex items-center gap-5 sm:gap-6`}>
 			{/* Круг со средним значением */}
-			<div className='relative flex items-center justify-center'>
+			<div className='relative flex items-center justify-center max-[375px]:w-full'>
 				<svg
 					width={size}
 					height={size}
@@ -91,14 +89,14 @@ export default function FeedbackAverage({
 
 			{/* Разбивка по оценкам (если items переданы) */}
 			{breakdown && (
-				<div className='flex-1 min-w-[180px]'>
+				<div className='flex-1 max-[375px]:hidden'>
 					<ul className='space-y-2'>
 						{breakdown.map(({ stars, count, percent }) => (
 							<li
 								key={stars}
 								className='flex items-center gap-3'>
-								<div className='w-10 shrink-0 text-sm text-gray-600 tabular-nums'>
-									{stars}★
+								<div className='w-7 shrink-0 text-sm text-gray-600 tabular-nums max-[400px]:hidden'>
+									{stars} ★
 								</div>
 								<div className='relative h-2 w-full bg-gray-100 rounded-full overflow-hidden'>
 									<div
@@ -107,7 +105,7 @@ export default function FeedbackAverage({
 										aria-hidden='true'
 									/>
 								</div>
-								<div className='w-16 text-sm text-gray-600 tabular-nums'>
+								<div className='w-16 text-sm text-gray-600 tabular-nums max-[400px]:w-50'>
 									{count}
 								</div>
 							</li>
