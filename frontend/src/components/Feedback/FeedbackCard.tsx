@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Star, ChevronDown, ChevronUp } from "lucide-react";
 import { Feedback } from "@/types";
-import ErrorMessage from "../ErrorMessage";
 
 const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
 	const isLong = review.length > 200;
@@ -32,7 +31,9 @@ const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
 			<div className='flex items-start justify-between mb-4'>
 				<div className='flex-1'>
 					<h3 className='font-semibold text-gray-800 text-lg'>{name}</h3>
-					<p className='text-gray-500 text-sm'>{formatDate(createdAt)}</p>
+					<p className='text-gray-500 text-sm pt-[3px]'>
+						{formatDate(createdAt)}
+					</p>
 				</div>
 				<div className='flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full'>
 					{[...Array(5)].map((_, i) => (

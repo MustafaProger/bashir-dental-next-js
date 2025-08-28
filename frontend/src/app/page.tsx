@@ -1,12 +1,12 @@
 import { feedbackContent, servicesContent, slidesContent } from "../data/data";
 import CompareSlider from "../components/CompareSlider/CompareSlider";
-import FeedbackCard from "../components/FeedbackCard/FeedbackCard";
+import FeedbackCard from "../components/Feedback/FeedbackCard";
 import Slider from "../components/Slider";
 import FlipCard from "../components/FlipCard";
 
 import style from "./styles/module/hero.module.css";
 import CompareSliderContainer from "../components/CompareSlider/CompareSliderContainer";
-import FeedbackCardContainer from "@/components/FeedbackCard/FeedbackCardContainer";
+import FeedbackCardContainer from "@/components/Feedback/FeedbackContainer";
 
 export default function Home(): React.JSX.Element {
 	return (
