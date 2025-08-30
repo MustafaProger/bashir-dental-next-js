@@ -5,7 +5,7 @@ import { Star, ChevronDown, ChevronUp } from "lucide-react";
 import { Feedback } from "@/types";
 
 const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
-	const isLong = review.length > 200;
+	const isLong = review.length > 100;
 	const [isExpanded, setIsExpanded] = useState(!isLong);
 
 	const highlightBashir = (text: string) => {
@@ -16,7 +16,7 @@ const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
 	};
 
 	const truncatedReview =
-		isLong && !isExpanded ? review.substring(0, 150) + "..." : review;
+		isLong && !isExpanded ? review.substring(0, 100) + "..." : review;
 
 	const formatDate = (isoDate: string) => {
 		return new Date(isoDate).toLocaleDateString("ru-RU", {
@@ -27,7 +27,7 @@ const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
 	};
 
 	return (
-		<div className='bg-white rounded-xl shadow-lg p-6 border-l-4 border-[#01B5DF] hover:shadow-xl transition-all duration-300 hover:-translate-y-1'>
+		<div className='bg-white rounded-xl shadow p-6 border-l-4 border-[#01B5DF] hover:shadow transition-all duration-300 hover:-translate-y-1'>
 			<div className='flex items-start justify-between mb-4'>
 				<div className='flex-1'>
 					<h3 className='font-semibold text-gray-800 text-lg'>{name}</h3>
@@ -52,7 +52,7 @@ const FeedbackCard = ({ name, rating, createdAt, review }: Feedback) => {
 			</div>
 
 			{/* Review Text */}
-			<div className='text-gray-700 leading-relaxed'>
+			<div className='text-gray-700 leading-relaxed whitespace-pre-wrap [overflow-wrap:anywhere]'>
 				<div
 					dangerouslySetInnerHTML={{
 						__html: highlightBashir(truncatedReview),

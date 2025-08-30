@@ -24,7 +24,8 @@
       "max": 5
     },
     "review": {
-      "type": "text"
+      "type": "text",
+      "required": true
     }
   }
 }

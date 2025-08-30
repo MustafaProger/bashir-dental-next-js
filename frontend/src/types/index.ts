@@ -87,3 +87,15 @@ export type Header = {
 	scrollProgress: number;
 	toggleMenu: () => void;
 };
+
+export type CreateFeedbackPayload = {
+	name: string;
+	rating: number;
+	review: string;
+};
+
+export type FormState = {
+	name: string;
+	rating: number;
+	review: string;
+};

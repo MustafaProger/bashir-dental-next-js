@@ -1,18 +1,17 @@
-import { feedbackContent, servicesContent, slidesContent } from "../data/data";
-import CompareSlider from "../components/CompareSlider/CompareSlider";
-import FeedbackCard from "../components/Feedback/FeedbackCard";
+import { servicesContent, slidesContent } from "../data/data";
 import Slider from "../components/Slider";
 import FlipCard from "../components/FlipCard";
 
 import style from "./styles/module/hero.module.css";
 import CompareSliderContainer from "../components/CompareSlider/CompareSliderContainer";
 import FeedbackCardContainer from "@/components/Feedback/FeedbackContainer";
+import ContactSection from "@/components/ContactSection";
 
 export default function Home(): React.JSX.Element {
 	return (
 		<div>
 			<section
-				className={`scroll-mt-[140px] ${style.heroContent}`}
+				className={`scroll-mt-[140px]  ${style.heroContent}`}
 				id='hero'>
 				<div className='max-w-[1200px] flex mx-auto px-[30px]'>
 					<div className='max-w-115 min-h-[640px] flex flex-col items-start justify-center gap-[15px]'>
@@ -58,13 +57,30 @@ export default function Home(): React.JSX.Element {
 			</section>
 
 			<section
-				id='feedback'
-				className='scroll-mt-[140px]'>
+				id='feedbacks'
+				className='scroll-mt-[140px] bg-[#F8F9FA]'>
 				<div className='container'>
 					<h2 className='title_h2'>Отзывы</h2>
 					<FeedbackCardContainer />
 				</div>
 			</section>
+
+			<section
+				id='contacts'
+				className='scroll-mt-[140px]'>
+				<div className='container'>
+					<h2 className='title_h2'>Связаться</h2>
+					<ContactSection />
+				</div>
+			</section>
+
+			<footer className='scroll-mt-[140px] bg-[#F8F9FA]'>
+				<div className='py-6'>
+					<div className='text-sm text-center text-gray-600'>
+						© {new Date().getFullYear()} Bashir Dental. Все права защищены.
+					</div>
+				</div>
+			</footer>
 		</div>
 	);
 }

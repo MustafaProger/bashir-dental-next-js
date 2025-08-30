@@ -10,7 +10,7 @@ import { Feedback } from "@/types";
 import FeedbackAverageWriteContainer from "./FeedbackAverageWriteContainer";
 
 const FeedbackContainer = (): JSX.Element => {
-	const { isPending, isError, data, error } = useQuery({
+	const { isPending, isError, data } = useQuery({
 		queryKey: ["feedback"],
 		queryFn: () =>
 			getFeedback(process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"),
@@ -18,19 +18,32 @@ const FeedbackContainer = (): JSX.Element => {
 		placeholderData: keepPreviousData,
 	});
 
+	// Надёжно сортируем по дате (DESC). Некорректные даты уходят в конец.
+	const sortedData = useMemo<Feedback[]>(() => {
+		const list = (data?.data ?? []) as Feedback[];
+		return [...list].sort((a, b) => {
+			const ta = Date.parse(a.createdAt ?? "");
+			const tb = Date.parse(b.createdAt ?? "");
+			// сначала валидные даты, потом невалидные
+			if (isNaN(ta) && isNaN(tb)) return 0;
+			if (isNaN(ta)) return 1;
+			if (isNaN(tb)) return -1;
+			return tb - ta; // новое раньше
+		});
+	}, [data]);
+
 	const items = useMemo(
 		() =>
-			(data?.data ?? [])
-				.filter((i: Feedback) => Number.isFinite(Number(i.rating)))
-				.map((i: Feedback) => ({
+			sortedData
+				.filter((i) => Number.isFinite(Number(i.rating)))
+				.map((i) => ({
 					rating: Number(i.rating),
 					createdAt: i.createdAt,
 				})),
-		[data]
+		[sortedData]
 	);
 
 	if (isPending) return <Loading />;
-
 	if (isError) return <ErrorMessage />;
 
 	return (
@@ -41,9 +54,9 @@ const FeedbackContainer = (): JSX.Element => {
 				ctaHref='/feedbacks/new'
 			/>
 
-			{/* Лента отзывов */}
+			{/* Лента отзывов (от новых к старым) */}
 			<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
-				{data.data.map(({ id, name, rating, createdAt, review }: Feedback) => (
+				{sortedData.map(({ id, name, rating, createdAt, review }) => (
 					<div
 						key={id}
 						className='relative'>

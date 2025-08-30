@@ -446,7 +446,7 @@ export interface ApiFeedbackFeedback extends Struct.CollectionTypeSchema {
         },
         number
       >;
-    review: Schema.Attribute.Text;
+    review: Schema.Attribute.Text & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

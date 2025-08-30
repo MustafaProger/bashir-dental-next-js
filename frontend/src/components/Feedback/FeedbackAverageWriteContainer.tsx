@@ -32,11 +32,11 @@ export default function FeedbackAverageWriteContainer({
 
 	return (
 		<div
-			className={`w-full bg-white rounded-2xl border border-none pb-[20px]`}
+			className={`w-full bg-[#F8F9FA] rounded-2xl border border-none pb-[20px]`}
 			aria-label='Отзывы — сводка и добавление'>
 			<div className='grid grid-cols-1 min-[900px]:grid-cols-2 gap-4 sm:gap-6'>
 				{/* Левый блок: средняя оценка */}
-				<div className='flex items-center gap-5 rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6'>
+				<div className='bg-white flex items-center gap-5 rounded-2xl border border-gray-100 shadow p-5 sm:p-6'>
 					<FeedbackAverage
 						avg={avg}
 						items={items}
@@ -44,7 +44,7 @@ export default function FeedbackAverageWriteContainer({
 				</div>
 
 				{/* Правый блок: CTA оставить отзыв */}
-				<div className='w-full bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6'>
+				<div className='w-full bg-white rounded-2xl border border-gray-100 shadow p-5 sm:p-6'>
 					<div className='flex items-start gap-3'>
 						<div className='shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-[#01B5DF]/10 text-[#01B5DF] max-[425px]:hidden'>
 							<MessageSquarePlus size={20} />
