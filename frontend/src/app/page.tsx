@@ -12,7 +12,7 @@ import ContactSection from "@/components/ContactSection";
 import { motion } from "framer-motion";
 import { fadeUp, fade, staggerContainer } from "@/lib/motion";
 
-export default function Home(): React.JSX.Element {
+export default function Home() {
 	return (
 		<div>
 			{/* Hero section */}

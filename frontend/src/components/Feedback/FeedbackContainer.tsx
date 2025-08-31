@@ -26,7 +26,7 @@ const itemVariants = {
 	},
 } satisfies Variants;
 
-export default function FeedbackContainer(): JSX.Element {
+export default function FeedbackContainer() {
 	const { isPending, isError, data } = useQuery({
 		queryKey: ["feedback"],
 		queryFn: () =>
