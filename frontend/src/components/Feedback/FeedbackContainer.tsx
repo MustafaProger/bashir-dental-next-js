@@ -8,8 +8,25 @@ import Loading from "../Loading";
 import ErrorMessage from "../ErrorMessage";
 import { Feedback } from "@/types";
 import FeedbackAverageWriteContainer from "./FeedbackAverageWriteContainer";
+import { motion, type Variants } from "framer-motion";
 
-const FeedbackContainer = (): JSX.Element => {
+const listVariants = {
+	hidden: {},
+	show: {
+		transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+	},
+} satisfies Variants;
+
+const itemVariants = {
+	hidden: { opacity: 0, y: 14 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.45, ease: "easeOut" as const },
+	},
+} satisfies Variants;
+
+export default function FeedbackContainer(): JSX.Element {
 	const { isPending, isError, data } = useQuery({
 		queryKey: ["feedback"],
 		queryFn: () =>
@@ -18,17 +35,15 @@ const FeedbackContainer = (): JSX.Element => {
 		placeholderData: keepPreviousData,
 	});
 
-	// Надёжно сортируем по дате (DESC). Некорректные даты уходят в конец.
 	const sortedData = useMemo<Feedback[]>(() => {
 		const list = (data?.data ?? []) as Feedback[];
 		return [...list].sort((a, b) => {
 			const ta = Date.parse(a.createdAt ?? "");
 			const tb = Date.parse(b.createdAt ?? "");
-			// сначала валидные даты, потом невалидные
 			if (isNaN(ta) && isNaN(tb)) return 0;
 			if (isNaN(ta)) return 1;
 			if (isNaN(tb)) return -1;
-			return tb - ta; // новое раньше
+			return tb - ta;
 		});
 	}, [data]);
 
@@ -36,10 +51,7 @@ const FeedbackContainer = (): JSX.Element => {
 		() =>
 			sortedData
 				.filter((i) => Number.isFinite(Number(i.rating)))
-				.map((i) => ({
-					rating: Number(i.rating),
-					createdAt: i.createdAt,
-				})),
+				.map((i) => ({ rating: Number(i.rating), createdAt: i.createdAt })),
 		[sortedData]
 	);
 
@@ -48,18 +60,22 @@ const FeedbackContainer = (): JSX.Element => {
 
 	return (
 		<div className='space-y-6 mx-auto'>
-			{/* Сводка + CTA */}
 			<FeedbackAverageWriteContainer
 				items={items}
 				ctaHref='/feedbacks/new'
 			/>
 
-			{/* Лента отзывов (от новых к старым) */}
-			<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
+			<motion.div
+				variants={listVariants}
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.2 }}
+				className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
 				{sortedData.map(({ id, name, rating, createdAt, review }) => (
-					<div
+					<motion.div
 						key={id}
-						className='relative'>
+						variants={itemVariants}
+						whileHover={{ y: -2 }}>
 						<FeedbackCard
 							id={id}
 							name={name}
@@ -67,11 +83,9 @@ const FeedbackContainer = (): JSX.Element => {
 							rating={rating}
 							review={review}
 						/>
-					</div>
+					</motion.div>
 				))}
-			</div>
+			</motion.div>
 		</div>
 	);
-};
-
-export default FeedbackContainer;
+}

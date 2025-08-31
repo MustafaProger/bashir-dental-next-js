@@ -1,3 +1,5 @@
+"use client";
+
 import { servicesContent, slidesContent } from "../data/data";
 import Slider from "../components/Slider";
 import FlipCard from "../components/FlipCard";
@@ -7,72 +9,135 @@ import CompareSliderContainer from "../components/CompareSlider/CompareSliderCon
 import FeedbackCardContainer from "@/components/Feedback/FeedbackContainer";
 import ContactSection from "@/components/ContactSection";
 
+import { motion } from "framer-motion";
+import { fadeUp, fade, staggerContainer } from "@/lib/motion";
+
 export default function Home(): React.JSX.Element {
 	return (
 		<div>
+			{/* Hero section */}
 			<section
-				className={`scroll-mt-[140px]  ${style.heroContent}`}
-				id='hero'>
+				id='hero'
+				className={`scroll-mt-[140px] ${style.heroContent}`}>
 				<div className='max-w-[1200px] flex mx-auto px-[30px]'>
-					<div className='max-w-115 min-h-[640px] flex flex-col items-start justify-center gap-[15px]'>
-						<h1 className='text-[52px]/[62px] font-bold text-white'>
+					<motion.div
+						className='max-w-115 min-h-[640px] flex flex-col items-start justify-center gap-[15px]'
+						initial='hidden'
+						animate='show'
+						variants={staggerContainer(0.2, 0.12)}>
+						<motion.h1
+							className='text-[52px]/[62px] font-bold text-white'
+							variants={fadeUp}>
 							Ваша улыбка — моя забота
-						</h1>
-						<p className='text-white'>
+						</motion.h1>
+
+						<motion.p
+							className='text-white'
+							variants={fadeUp}>
 							Профессиональные стоматологические услуги от врача с опытом,
 							включая имплантацию и протезирование на имплантатах.
-						</p>
-						<a
-							href='https://wa.me/+79880246554'
+						</motion.p>
+
+						<motion.a
+							href='https://wa.me/79880246554' // без +
 							target='_blank'
-							className='btn-secondary bg-transparent text-white hover:bg-[#01b5e1] hover:border-[#01b5e1]'>
+							className='btn-secondary bg-transparent text-white hover:bg-[#01b5e1] hover:border-[#01b5e1]'
+							variants={fadeUp}>
 							Бесплатная консультация
-						</a>
-					</div>
+						</motion.a>
+					</motion.div>
 				</div>
 			</section>
-			<section
+
+			{/* About me section */}
+			<motion.section
 				id='about-me'
-				className='scroll-mt-[140px]'>
+				className='scroll-mt-[140px]'
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={staggerContainer()}>
 				<div className='container'>
-					<h2 className='title_h2 mb-0'>Обо мне</h2>
-					<Slider slides={slidesContent} />
+					<motion.h2
+						className='title_h2 mb-0'
+						variants={fadeUp}>
+						Обо мне
+					</motion.h2>
+					<motion.div variants={fadeUp}>
+						<Slider slides={slidesContent} />
+					</motion.div>
 				</div>
-			</section>
-			<section
+			</motion.section>
+
+			{/* Services section */}
+			<motion.section
 				id='services'
-				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
+				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={staggerContainer()}>
 				<div className='container'>
-					<h2 className='title_h2'>Услуги</h2>
-					<FlipCard services={servicesContent} />
+					<motion.h2
+						className='title_h2'
+						variants={fadeUp}>
+						Услуги
+					</motion.h2>
+					<motion.div variants={fadeUp}>
+						<FlipCard services={servicesContent} />
+					</motion.div>
 				</div>
-			</section>
-			<section
+			</motion.section>
+
+			{/* Works section */}
+			<motion.section
 				id='works'
-				className='scroll-mt-[140px]'>
+				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.2 }}
+				variants={staggerContainer()}>
 				<div className='container'>
-					<h2 className='title_h2'>Работы</h2>
+					<motion.h2
+						className='title_h2'
+						variants={fadeUp}>
+						Работы
+					</motion.h2>
 					<CompareSliderContainer />
 				</div>
-			</section>
+			</motion.section>
 
-			<section
+			{/* Feedbacks section */}
+			<motion.section
 				id='feedbacks'
-				className='scroll-mt-[140px] bg-[#F8F9FA]'>
+				className='scroll-mt-[140px] bg-[#F8F9FA]'
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={staggerContainer()}>
 				<div className='container'>
-					<h2 className='title_h2'>Отзывы</h2>
+					<motion.h2
+						className='title_h2'
+						variants={fadeUp}>Отзывы</motion.h2>
 					<FeedbackCardContainer />
 				</div>
-			</section>
+			</motion.section>
 
-			<section
+			{/* Contacts section */}
+			<motion.section
 				id='contacts'
-				className='scroll-mt-[140px]'>
+				className='scroll-mt-[140px] bg-[#F8F9FA]'
+				initial='hidden'
+				whileInView='show'
+				viewport={{ once: true, amount: 0.4 }}
+				variants={staggerContainer()}>
 				<div className='container'>
-					<h2 className='title_h2'>Связаться</h2>
+					<motion.h2
+						className='title_h2'
+						variants={fadeUp}>Связаться</motion.h2>
 					<ContactSection />
 				</div>
-			</section>
+			</motion.section>
 
 			<footer className='scroll-mt-[140px] bg-[#F8F9FA]'>
 				<div className='py-6'>

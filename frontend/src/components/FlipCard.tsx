@@ -5,11 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ServicesContent } from "@/types";
 
-type Props = {
-	services: ServicesContent[];
-};
-
-const FlipCard = ({ services }: Props) => {
+const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 	const [flipped, setFlipped] = useState(Array(services.length).fill(false));
 
 	const handleFlip = (index: number) => {

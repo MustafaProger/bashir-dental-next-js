@@ -35,7 +35,6 @@ const Slider: React.FC<Props> = ({ slides }) => {
 					setActiveIndex(swiper.realIndex);
 				}}
 				breakpoints={{
-
 					1024: {
 						slidesPerView: 3,
 					},

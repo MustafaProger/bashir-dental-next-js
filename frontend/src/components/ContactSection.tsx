@@ -3,11 +3,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { contactLinks, mediaLinks } from "../data/data";
+import { motion, type Variants } from "framer-motion";
+
+const gridVariants = {
+	hidden: {},
+	show: {
+		transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+	},
+} satisfies Variants;
+
+const colVariants = {
+	hidden: { opacity: 0, y: 14 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.45, ease: "easeOut" as const },
+	},
+} satisfies Variants;
 
 export default function ContactSection() {
 	return (
-		<div className='grid gap-6 md:gap-8 min-[880px]:grid-cols-2'>
-			<div className='min-w-0'>
+		<motion.div
+			className='grid gap-6 md:gap-8 min-[880px]:grid-cols-2'
+			variants={gridVariants}
+			initial='hidden'
+			whileInView='show'
+			viewport={{ once: true, amount: 0.2 }}>
+			{/* Контакты */}
+			<motion.div
+				className='min-w-0'
+				variants={colVariants}
+				whileHover={{ y: -2 }}>
 				<div className='w-full bg-white rounded-2xl shadow p-6 sm:p-8 border border-[#01B5E1]/40'>
 					<h2 className='text-2xl font-semibold'>Связаться</h2>
 
@@ -43,9 +69,13 @@ export default function ContactSection() {
 						))}
 					</ul>
 				</div>
-			</div>
+			</motion.div>
 
-			<div className='min-w-0'>
+			{/* Медиа/мессенджеры */}
+			<motion.div
+				className='min-w-0'
+				variants={colVariants}
+				whileHover={{ y: -2 }}>
 				<div className='w-full bg-white rounded-2xl shadow p-6 sm:p-8 border border-[#01B5E1]/40'>
 					<h2 className='text-2xl font-semibold'>Соцсети и мессенджеры</h2>
 
@@ -71,7 +101,7 @@ export default function ContactSection() {
 						))}
 					</div>
 				</div>
-			</div>
-		</div>
+			</motion.div>
+		</motion.div>
 	);
 }

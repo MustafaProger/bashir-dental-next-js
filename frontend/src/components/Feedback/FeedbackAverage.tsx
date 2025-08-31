@@ -1,6 +1,16 @@
+// src/components/Feedback/FeedbackAverage.tsx
 "use client";
-import React, { useMemo } from "react";
+
+import React, { useMemo, useRef, useEffect } from "react";
 import { Star } from "lucide-react";
+import {
+	motion,
+	useInView,
+	useMotionValue,
+	useTransform,
+	animate,
+	useReducedMotion,
+} from "framer-motion";
 
 type Item = { rating: number };
 
@@ -11,14 +21,16 @@ export default function FeedbackAverage({
 	avg: number;
 	items?: Item[]; // если передашь — покажем разбивку 5..1
 }) {
+	// ---- Геометрия круга
 	const size = 140;
 	const stroke = 10;
 	const r = (size - stroke) / 2;
 	const c = 2 * Math.PI * r;
-	const pct = Math.max(0, Math.min(100, (avg / 5) * 100));
-	const dash = (pct / 100) * c;
 
-	// Разбивка по оценкам 5..1 + проценты
+	// Итоговый процент круга
+	const pct = Math.max(0, Math.min(100, (avg / 5) * 100));
+
+	// ---- Разбивка 5..1
 	const breakdown = useMemo(() => {
 		if (!items?.length) return null;
 		const total = items.length;
@@ -31,9 +43,37 @@ export default function FeedbackAverage({
 		});
 	}, [items]);
 
+	// ---- Триггер анимации при входе в вьюпорт
+	const ref = useRef<HTMLDivElement | null>(null);
+	const inView = (useInView(ref, { once: true, amount: 0.35 }) ??
+		false) as boolean;
+	const reduce = (useReducedMotion() ?? false) as boolean;
+
+	// ---- Общий прогресс 0..100: рулит дугой и числом
+	const progress = useMotionValue(0);
+	const dashLen = useTransform(progress, (p) => (p / 100) * c); // длина дуги
+	const num = useTransform(progress, (p) => (p / 100) * avg); // значение числа
+	const numText = useTransform(num, (v) => v.toFixed(1)); // форматированное число
+	const dashArray = useTransform(dashLen, (d) => `${d} ${c - d}`);
+
+	useEffect(() => {
+		if (!inView) return;
+		if (reduce) {
+			progress.set(pct);
+			return;
+		}
+		const controls = animate(progress, pct, {
+			duration: 0.9,
+			ease: [2, 2, 2, 2], // easeOut
+		});
+		return () => controls.stop();
+	}, [inView, pct, progress, reduce]);
+
 	return (
-		<div className={`w-full flex items-center gap-5 sm:gap-6`}>
-			{/* Круг со средним значением */}
+		<div
+			ref={ref}
+			className='w-full flex items-center gap-5 sm:gap-6'>
+			{/* Круг со средним значением (анимируется) */}
 			<div className='relative flex items-center justify-center max-[375px]:w-full'>
 				<svg
 					width={size}
@@ -49,7 +89,7 @@ export default function FeedbackAverage({
 						strokeWidth={stroke}
 						fill='none'
 					/>
-					<circle
+					<motion.circle
 						cx={size / 2}
 						cy={size / 2}
 						r={r}
@@ -57,16 +97,20 @@ export default function FeedbackAverage({
 						strokeWidth={stroke}
 						fill='none'
 						strokeLinecap='round'
-						strokeDasharray={`${dash} ${c - dash}`}
+						// рисуем дугу через dasharray
+						style={{
+							strokeDasharray: dashArray,
+						}}
 						transform={`rotate(-90 ${size / 2} ${size / 2})`}
 					/>
 				</svg>
 
 				<div className='absolute flex flex-col items-center'>
 					<div className='flex items-baseline gap-1'>
-						<span className='text-2xl font-semibold text-gray-900 tabular-nums'>
-							{avg.toFixed(1)}
-						</span>
+						{/* число растёт синхронно с кругом */}
+						<motion.span className='text-2xl font-semibold text-gray-900 tabular-nums'>
+							{numText}
+						</motion.span>
 						<span className='text-gray-500 text-sm'>/5</span>
 					</div>
 					<div
@@ -87,7 +131,7 @@ export default function FeedbackAverage({
 				</div>
 			</div>
 
-			{/* Разбивка по оценкам (если items переданы) */}
+			{/* Прогресс-бары 5..1 (если есть items) */}
 			{breakdown && (
 				<div className='flex-1 max-[375px]:hidden'>
 					<ul className='space-y-2'>
@@ -99,10 +143,10 @@ export default function FeedbackAverage({
 									{stars} ★
 								</div>
 								<div className='relative h-2 w-full bg-gray-100 rounded-full overflow-hidden'>
-									<div
-										className='absolute inset-y-0 left-0 bg-yellow-400'
-										style={{ width: `${percent}%` }}
-										aria-hidden='true'
+									<AnimatedBar
+										percent={percent}
+										inView={inView}
+										reduce={reduce}
 									/>
 								</div>
 								<div className='w-16 text-sm text-gray-600 tabular-nums max-[400px]:w-50'>
@@ -114,5 +158,41 @@ export default function FeedbackAverage({
 				</div>
 			)}
 		</div>
+	);
+}
+
+/** Анимируемая полоска прогресса (5..1) */
+function AnimatedBar({
+	percent,
+	inView,
+	reduce,
+}: {
+	percent: number;
+	inView: boolean;
+	reduce: boolean;
+}) {
+	const mv = useMotionValue(0);
+	const widthText = useTransform(mv, (v) => `${v}%`);
+
+	useEffect(() => {
+		if (!inView) return;
+		if (reduce) {
+			mv.set(percent);
+			return;
+		}
+		const controls = animate(mv, percent, {
+			duration: 0.7,
+			ease: [2, 2, 2, 2],
+			delay: 0.3, // лёгкая задержка после круга
+		});
+		return () => controls.stop();
+	}, [inView, percent, mv, reduce]);
+
+	return (
+		<motion.div
+			className='absolute inset-y-0 left-0 bg-yellow-400'
+			style={{ width: widthText }}
+			aria-hidden='true'
+		/>
 	);
 }
