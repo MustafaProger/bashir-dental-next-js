@@ -28,7 +28,7 @@ const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 								alt={service.alt}
 								width={50}
 								height={60}
-								className='h-12'
+								className='h-12 w-auto'
 							/>
 							<h3 className='text-xl font-semibold'>{service.title}</h3>
 							<p className='text-sm text-gray-700'>{service.frontText}</p>

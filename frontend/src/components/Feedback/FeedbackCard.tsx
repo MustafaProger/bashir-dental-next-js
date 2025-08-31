@@ -48,7 +48,7 @@ export default function FeedbackCard({
 			className='relative bg-white rounded-xl shadow p-6 border-l-4 border-[#01B5DF] transition-shadow duration-300 hover:shadow'>
 			<div className='flex items-start justify-between mb-4'>
 				<div className='flex-1 min-w-0'>
-					<h3 className='font-semibold text-gray-800 text-lg break-words [overflow-wrap:anywhere]'>
+					<h3 className='font-semibold text-gray-800 text-lg [overflow-wrap:anywhere]'>
 						{name}
 					</h3>
 					<p className='text-gray-500 text-sm pt-[3px]'>
@@ -72,7 +72,7 @@ export default function FeedbackCard({
 			</div>
 
 			{/* Текст отзыва с плавным раскрытием */}
-			<div className='text-gray-700 leading-relaxed whitespace-pre-wrap break-words [overflow-wrap:anywhere]'>
+			<div className='text-gray-700 leading-relaxed whitespace-pre-wrap [overflow-wrap:anywhere]'>
 				<AnimatePresence
 					initial={false}
 					mode='wait'>

@@ -89,13 +89,14 @@ const Header: React.FC<Header> = ({
 				<div className={`header__content_bottom bg-[#fff]`}>
 					<div className='relative flex justify-between items-center mx-auto px-[30px]'>
 						<a
-							className='z-12'
+							className='z-12 w-[90px] h-[75px]'
 							href='#hero'>
 							<Image
 								src='/assets/iconFor/site.svg'
 								alt='icon'
 								width={90}
-								height={50}
+								height={75}
+								className="object-contain"
 							/>
 						</a>
 
