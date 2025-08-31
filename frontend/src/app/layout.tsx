@@ -5,7 +5,7 @@ import HeaderContainer from "../components/Header/HeaderContainer";
 import Providers from "./providers";
 
 // TODO: когда будет домен — раскомментируй и подставь:
-const SITE_URL = new URL("https://bashir-dental.ru");
+const SITE_URL = new URL("https://bashir-dental.vercel.app/");
 
 export const metadata: Metadata = {
 	// metadataBase: SITE_URL,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 		"Стоматолог Башир",
 	],
 	alternates: {
-		canonical: "https://bashir-dental.ru", // когда будет домен + роуты — можно указывать абсолютные каноникалы
+		canonical: "https://bashir-dental.vercel.app/", // когда будет домен + роуты — можно указывать абсолютные каноникалы
 	},
 	robots: {
 		index: true,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 		title: "Стоматолог Башир — лечение и имплантация зубов в Каспийске",
 		description:
 			"Современное лечение, имплантация, протезирование, чистка зубов. Приём по записи. Ул. Ленина, 78, Каспийск. Тел.: +7 988 024-65-54.",
-		url: "https://bashir-dental.ru", // подставим абсолютный позже
+		url: "https://bashir-dental.vercel.app/", // подставим абсолютный позже
 		siteName: "Стоматолог Башир",
 		images: [
 			// сделай отдельную картинку 1200×630 (og.jpg). Временно можно оставить favicon, но лучше og-изображение.
@@ -103,7 +103,7 @@ export default function RootLayout({
 								openingHours: "ByAppointment",
 								areaServed: "Каспийск",
 								priceRange: "₽₽", // можешь поменять на ₽–₽₽₽
-								url: "/", // подставим абсолютный, когда будет домен
+								url: "https://bashir-dental.vercel.app/", // подставим абсолютный, когда будет домен
 								sameAs: [] as string[], // добавим соцсети позже
 								hasOfferCatalog: {
 									"@type": "OfferCatalog",
@@ -155,7 +155,7 @@ export default function RootLayout({
 									postalCode: "368300",
 									addressCountry: "RU",
 								},
-								url: "/",
+								url: "https://bashir-dental.vercel.app/",
 							},
 						]),
 					}}

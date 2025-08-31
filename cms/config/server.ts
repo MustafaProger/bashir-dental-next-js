@@ -1,6 +1,7 @@
-// cms/config/server.ts
 export default ({ env }) => ({
-  url: env('https://bashir-dental.ru'),     // например, https://cms.башир-домен.ru
-  proxy: true,
-  app: { keys: env.array('APP_KEYS') },
+  host: env('HOST', '0.0.0.0'),
+  port: env.int('PORT', 1337),
+  app: {
+    keys: env.array('APP_KEYS'),
+  },
 });
