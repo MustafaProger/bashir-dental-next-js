@@ -53,11 +53,6 @@ export default function FeedbackCreatePage() {
 
 	const reduce = useReducedMotion() ?? false;
 
-	const apiUrl = useMemo(
-		() => process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337",
-		[]
-	);
-
 	const isValid = useMemo(() => {
 		const nameOk = form.name.trim().length >= 3;
 		const ratingOk = form.rating >= 1 && form.rating <= 5;
@@ -72,7 +67,7 @@ export default function FeedbackCreatePage() {
 		setError(null);
 
 		try {
-			await createFeedback(apiUrl, {
+			await createFeedback({
 				name: form.name.trim(),
 				rating: form.rating,
 				review: form.review.trim(),
