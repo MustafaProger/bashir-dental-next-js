@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { Star, Loader2, CheckCircle2, Home } from "lucide-react";
-import { createFeedback } from "@/services/feedback.api";
+import { createFeedback } from "@/services/feedbacks.api";
 import Link from "next/link";
 import { FormState } from "@/types";
 import {

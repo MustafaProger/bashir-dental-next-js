@@ -1,6 +1,6 @@
 "use client";
 
-import { getFeedback } from "@/services/feedback.api";
+import { getFeedback } from "@/services/feedbacks.api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import React, { useMemo } from "react";
 import FeedbackCard from "./FeedbackCard";
