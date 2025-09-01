@@ -29,8 +29,7 @@ const itemVariants = {
 export default function FeedbackContainer() {
 	const { isPending, isError, data } = useQuery({
 		queryKey: ["feedback"],
-		queryFn: () =>
-			getFeedback(),
+		queryFn: () => getFeedback(),
 		staleTime: 1000 * 60 * 5,
 		placeholderData: keepPreviousData,
 	});
@@ -65,16 +64,14 @@ export default function FeedbackContainer() {
 				ctaHref='/feedbacks/new'
 			/>
 
-			<motion.div
-				variants={listVariants}
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.2 }}
-				className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
+			<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'>
 				{sortedData.map(({ id, name, rating, createdAt, review }) => (
 					<motion.div
 						key={id}
 						variants={itemVariants}
+						initial='hidden'
+						whileInView='show'
+						viewport={{ once: true, amount: 0.2 }}
 						whileHover={{ y: -2 }}>
 						<FeedbackCard
 							id={id}
@@ -85,7 +82,7 @@ export default function FeedbackContainer() {
 						/>
 					</motion.div>
 				))}
-			</motion.div>
+			</div>
 		</div>
 	);
 }

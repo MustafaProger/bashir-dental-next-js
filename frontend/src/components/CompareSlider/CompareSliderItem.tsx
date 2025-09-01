@@ -4,6 +4,8 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import type { CompareSliderItem as CompareSliderItemProps } from "@/types";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
 
 const STRAPI_BASE = (process.env.NEXT_PUBLIC_STRAPI_URL ?? "").replace(
 	/\/$/,
@@ -139,7 +141,23 @@ export default function CompareSliderItem({
 	};
 
 	return (
-		<div className='relative overflow-hidden rounded-lg'>
+		<motion.div
+			// анимация появления КАЖДОЙ карточки, когда она сама стала видимой
+			initial='hidden'
+			whileInView='show'
+			viewport={{ once: true, amount: 0.25 }}
+			variants={{
+				hidden: fadeUp.hidden,
+				show: {
+					...fadeUp.show,
+					// небольшая индивидуальная задержка по индексу (можно убрать)
+					transition: {
+						...(fadeUp.show as any).transition,
+						delay: index * 0.06,
+					},
+				},
+			}}
+			className='relative overflow-hidden rounded-lg'>
 			<div
 				ref={containerRef}
 				className='relative h-full select-none'
@@ -177,7 +195,7 @@ export default function CompareSliderItem({
 					<div className='w-0.5 h-full bg-white/90' />
 				</div>
 
-				{/* Ручка — плавная прозрачность + сдвиг на +2px */}
+				{/* Ручка — плавная прозрачность + сдвиг на +4px (≈2px визуально) */}
 				<button
 					ref={thumbRef}
 					type='button'
@@ -193,7 +211,7 @@ export default function CompareSliderItem({
 						padding: 0,
 						touchAction: "none",
 						opacity: dragging ? 0 : 1,
-						transition: "opacity .38s ease", // только opacity, позицию не анимируем
+						transition: "opacity .38s ease",
 					}}>
 					<div
 						className='grid place-items-center rounded-full'
@@ -231,6 +249,6 @@ export default function CompareSliderItem({
 					</figure>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }

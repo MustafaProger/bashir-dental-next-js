@@ -1,9 +1,11 @@
+// src/components/FlipCard.tsx
 "use client";
 
 import { useState } from "react";
-
 import Image from "next/image";
 import { ServicesContent } from "@/types";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
 
 const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 	const [flipped, setFlipped] = useState(Array(services.length).fill(false));
@@ -15,13 +17,28 @@ const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 	return (
 		<div className='flex flex-wrap justify-center gap-6'>
 			{services.map((service: ServicesContent, index: number) => (
-				<div
+				<motion.div
 					key={index}
-					className={`[perspective:1000px] min-w-[360px] min-h-[360px]`}>
+					// анимация у САМОЙ карточки при появлении в вьюпорте
+					initial='hidden'
+					whileInView='show'
+					viewport={{ once: true, amount: 0.25 }}
+					variants={{
+						hidden: fadeUp.hidden,
+						show: {
+							...fadeUp.show,
+							transition: {
+								...(fadeUp.show as any).transition,
+								delay: index * 0.06,
+							},
+						},
+					}}
+					className='[perspective:1000px] min-w-[360px] min-h-[360px]'>
 					<div
 						className={`relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] ${
 							flipped[index] ? "rotate-y-180" : ""
 						}`}>
+						{/* Front side */}
 						<div className='absolute w-full h-full backface-hidden bg-white rounded-4xl shadow flex flex-col items-center justify-center gap-4 p-6'>
 							<Image
 								src={service.img}
@@ -39,6 +56,7 @@ const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 							</button>
 						</div>
 
+						{/* Back side */}
 						<div className='absolute w-full h-full backface-hidden rotate-y-180 bg-[#01b5e1] rounded-4xl shadow flex flex-col items-center justify-center gap-4 p-6 text-white'>
 							<h3 className='text-xl font-semibold'>{service.title}</h3>
 							<p className='text-sm'>{service.backText}</p>
@@ -49,7 +67,7 @@ const FlipCard = ({ services }: { services: ServicesContent[] }) => {
 							</button>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			))}
 		</div>
 	);

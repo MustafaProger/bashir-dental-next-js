@@ -37,19 +37,13 @@ export default function CompareSliderContainer() {
 		q.data?.pages.at(-1)?.meta?.pagination ?? null;
 
 	return (
-		<motion.div
-			variants={fadeUp}
-			initial='hidden'
-			whileInView='show'
-			viewport={{ once: true, amount: 0.2 }}>
-			<CompareSlider
-				works={works}
-				loading={q.isPending}
-				loadingMore={q.isFetchingNextPage}
-				error={q.isError ? (q.error as Error).message : null}
-				pagination={pagination}
-				onLoadMore={() => q.fetchNextPage()}
-			/>
-		</motion.div>
+		<CompareSlider
+			works={works}
+			loading={q.isPending}
+			loadingMore={q.isFetchingNextPage}
+			error={q.isError ? (q.error as Error).message : null}
+			pagination={pagination}
+			onLoadMore={() => q.fetchNextPage()}
+		/>
 	);
 }

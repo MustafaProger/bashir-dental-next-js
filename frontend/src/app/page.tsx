@@ -10,12 +10,12 @@ import FeedbackCardContainer from "@/components/Feedback/FeedbackContainer";
 import ContactSection from "@/components/ContactSection";
 
 import { motion } from "framer-motion";
-import { fadeUp, fade, staggerContainer } from "@/lib/motion";
+import { fadeUp, staggerContainer } from "@/lib/motion";
 
 export default function Home() {
 	return (
 		<div>
-			{/* Hero section */}
+			{/* Hero section (с анимацией) */}
 			<section
 				id='hero'
 				className={`scroll-mt-[140px] ${style.heroContent}`}>
@@ -39,7 +39,7 @@ export default function Home() {
 						</motion.p>
 
 						<motion.a
-							href='https://wa.me/79880246554' // без +
+							href='https://wa.me/79880246554'
 							target='_blank'
 							className='btn-secondary bg-transparent text-white hover:bg-[#01b5e1] hover:border-[#01b5e1]'
 							variants={fadeUp}>
@@ -49,95 +49,55 @@ export default function Home() {
 				</div>
 			</section>
 
-			{/* About me section */}
-			<motion.section
+			{/* About me section (без анимации) */}
+			<section
 				id='about-me'
-				className='scroll-mt-[140px]'
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.4 }}
-				variants={staggerContainer()}>
+				className='scroll-mt-[140px]'>
 				<div className='container'>
-					<motion.h2
-						className='title_h2 mb-0'
-						variants={fadeUp}>
-						Обо мне
-					</motion.h2>
-					<motion.div variants={fadeUp}>
-						<Slider slides={slidesContent} />
-					</motion.div>
+					<h2 className='title_h2 mb-0'>Обо мне</h2>
+					<Slider slides={slidesContent} />
 				</div>
-			</motion.section>
+			</section>
 
-			{/* Services section */}
-			<motion.section
+			{/* Services section (без анимации) */}
+			<section
 				id='services'
-				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.4 }}
-				variants={staggerContainer()}>
+				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
 				<div className='container'>
-					<motion.h2
-						className='title_h2'
-						variants={fadeUp}>
-						Услуги
-					</motion.h2>
-					<motion.div variants={fadeUp}>
-						<FlipCard services={servicesContent} />
-					</motion.div>
+					<h2 className='title_h2'>Услуги</h2>
+					<FlipCard services={servicesContent} />
 				</div>
-			</motion.section>
+			</section>
 
-			{/* Works section */}
-			<motion.section
+			{/* Works section (без анимации) */}
+			<section
 				id='works'
-				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.2 }}
-				variants={staggerContainer()}>
+				className='scroll-mt-[140px] bg-[#F8F9FA] text-center'>
 				<div className='container'>
-					<motion.h2
-						className='title_h2'
-						variants={fadeUp}>
-						Работы
-					</motion.h2>
+					<h2 className='title_h2'>Работы</h2>
 					<CompareSliderContainer />
 				</div>
-			</motion.section>
+			</section>
 
-			{/* Feedbacks section */}
-			<motion.section
+			{/* Feedbacks section (без анимации) */}
+			<section
 				id='feedbacks'
-				className='scroll-mt-[140px] bg-[#F8F9FA]'
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.4 }}
-				variants={staggerContainer()}>
+				className='scroll-mt-[140px] bg-[#F8F9FA]'>
 				<div className='container'>
-					<motion.h2
-						className='title_h2'
-						variants={fadeUp}>Отзывы</motion.h2>
+					<h2 className='title_h2'>Отзывы</h2>
 					<FeedbackCardContainer />
 				</div>
-			</motion.section>
+			</section>
 
-			{/* Contacts section */}
-			<motion.section
+			{/* Contacts section (без анимации) */}
+			<section
 				id='contacts'
-				className='scroll-mt-[140px] bg-[#F8F9FA]'
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.4 }}
-				variants={staggerContainer()}>
+				className='scroll-mt-[140px] bg-[#F8F9FA]'>
 				<div className='container'>
-					<motion.h2
-						className='title_h2'
-						variants={fadeUp}>Связаться</motion.h2>
+					<h2 className='title_h2'>Связаться</h2>
 					<ContactSection />
 				</div>
-			</motion.section>
+			</section>
 
 			<footer className='scroll-mt-[140px] bg-[#F8F9FA]'>
 				<div className='py-6'>
