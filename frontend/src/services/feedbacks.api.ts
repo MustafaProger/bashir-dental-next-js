@@ -1,7 +1,8 @@
 import { CreateFeedbackPayload } from "@/types";
 
 export async function getFeedback() {
-	const res = await fetch("/api/feedbacks", { next: { revalidate: 300 } });
+	// на клиенте 'next: { revalidate }' не работает — нужен no-store
+	const res = await fetch("/api/feedbacks", { cache: "no-store" });
 	if (!res.ok) throw new Error("Failed to fetch feedback");
 	return res.json();
 }
@@ -11,7 +12,9 @@ export async function createFeedback(payload: CreateFeedbackPayload) {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ data: payload }),
+		cache: "no-store",
 	});
+
 	if (!res.ok) {
 		let msg = "Failed to create feedback";
 		try {

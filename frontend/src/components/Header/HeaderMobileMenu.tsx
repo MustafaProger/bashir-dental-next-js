@@ -9,7 +9,7 @@ const HeaderMobileMenu: React.FC<HeaderMobileMenu> = ({
 }) => {
 	return (
 		<div
-			className={`fixed inset-0 z-40 bg-white/98 backdrop-blur-xl transition-all duration-500 lg:hidden ${
+			className={`fixed inset-0 z-1000 bg-white/98 backdrop-blur-xl transition-all duration-500 lg:hidden ${
 				menuOpen
 					? "opacity-100 visible"
 					: "opacity-0 invisible pointer-events-none"

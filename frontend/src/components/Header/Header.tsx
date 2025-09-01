@@ -22,7 +22,7 @@ const Header: React.FC<Header> = ({
 	return (
 		<>
 			<header
-				className='fixed top-0 z-10 min-w-[280px] transition-all duration-300 ease-out'
+				className='fixed top-0 z-999 min-w-[280px] transition-all duration-300 ease-out'
 				style={{
 					width: `${widthPercentage}%`,
 					left: "50%",

@@ -139,7 +139,7 @@ export default function FeedbackAverage({
 							<li
 								key={stars}
 								className='flex items-center gap-3'>
-								<div className='w-7 shrink-0 text-sm text-gray-600 tabular-nums max-[400px]:hidden'>
+								<div className='w-7 shrink-0 text-sm text-gray-600 tabular-nums '>
 									{stars} ★
 								</div>
 								<div className='relative h-2 w-full bg-gray-100 rounded-full overflow-hidden'>
@@ -149,7 +149,7 @@ export default function FeedbackAverage({
 										reduce={reduce}
 									/>
 								</div>
-								<div className='w-16 text-sm text-gray-600 tabular-nums max-[400px]:w-50'>
+								<div className='w-16 text-sm text-gray-600 tabular-nums max-[400px]:w-7'>
 									{count}
 								</div>
 							</li>
