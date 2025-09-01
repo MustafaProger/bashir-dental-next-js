@@ -1,13 +1,21 @@
 "use client";
+
 import { useRef, useEffect } from "react";
-import type { CompareSliderItem } from "@/types";
+import type { CompareSliderItem as CompareSliderItemProps } from "@/types";
 import Image from "next/image";
+
+const STRAPI_BASE = process.env.NEXT_PUBLIC_STRAPI_URL ?? "";
+
+const toSrc = (u?: string | null) => {
+	if (!u) return "";
+	if (u.startsWith("http://") || u.startsWith("https://")) return u;
+	return `${STRAPI_BASE}${u}`;
+};
 
 export default function CompareSliderItem({
 	work,
-	apiUrl,
 	index,
-}: CompareSliderItem) {
+}: CompareSliderItemProps) {
 	const sliderRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -18,17 +26,11 @@ export default function CompareSliderItem({
 			const thumb = element.querySelector<HTMLSpanElement>(
 				"[data-image-comparison-thumb]"
 			);
-
 			if (!sliderRange || !thumb) return;
-
-			const setSliderState = (e: Event) => {
-				sliderRange.classList.toggle("bg-blue-500/50", e.type === "input");
-			};
 
 			const moveSliderThumb = (e: MouseEvent) => {
 				const sliderWrapper = sliderRange.parentElement;
 				if (!sliderWrapper) return;
-
 				const rect = sliderWrapper.getBoundingClientRect();
 				let position = e.clientY - rect.top - 20;
 				position = Math.max(
@@ -47,19 +49,16 @@ export default function CompareSliderItem({
 				const overlay = element.querySelector<HTMLDivElement>(
 					"[data-image-comparison-overlay]"
 				);
-
 				if (slider) slider.style.left = `${value}%`;
 				if (overlay) overlay.style.width = `${value}%`;
-				setSliderState(e);
 			};
 
 			const mouseMoveHandler = (e: MouseEvent) => moveSliderThumb(e);
-			const mouseUpHandler = () => {
+			const mouseUpHandler = () =>
 				element.removeEventListener("mousemove", mouseMoveHandler);
-			};
 
 			sliderRange.addEventListener("mousedown", (e) => {
-				moveSliderThumb(e);
+				moveSliderThumb(e as unknown as MouseEvent);
 				element.addEventListener("mousemove", mouseMoveHandler);
 			});
 			sliderRange.addEventListener("mouseup", mouseUpHandler);
@@ -71,6 +70,16 @@ export default function CompareSliderItem({
 
 		if (sliderRef.current) initSlider(sliderRef.current);
 	}, []);
+
+	const afterUrl =
+		work?.afterImage?.[0]?.formats?.large?.url ??
+		work?.afterImage?.[0]?.url ??
+		null;
+
+	const beforeUrl =
+		work?.beforeImage?.[0]?.formats?.large?.url ??
+		work?.beforeImage?.[0]?.url ??
+		null;
 
 	return (
 		<div
@@ -86,35 +95,34 @@ export default function CompareSliderItem({
 					defaultValue='50'
 					className='absolute left-0 w-full h-full opacity-0 cursor-ew-resize z-2'
 					data-image-comparison-range=''
+					aria-label='Слайдер сравнения'
 				/>
 
+				{/* Левый слой (overlay) — условно "после" */}
 				<div
 					className='absolute top-0 left-0 w-1/2 h-full overflow-hidden z-1'
 					data-image-comparison-overlay=''>
 					<figure className='relative h-full'>
-						<Image
-							width={300}
-							height={300}
-							src={`${apiUrl}${
-								work.afterImage[0]?.formats?.large?.url ||
-								work.afterImage[0]?.url
-							}`}
-							alt='Before'
-							className='absolute w-full h-full object-cover object-left'
-						/>
+						{!!afterUrl && (
+							<Image
+								width={600}
+								height={400}
+								src={toSrc(afterUrl)}
+								alt='После'
+								className='absolute w-full h-full object-cover object-left'
+							/>
+						)}
 					</figure>
 				</div>
 
+				{/* Вертикальный ползунок */}
 				<div
-					className='absolute top-0 left-1/2 w-0.5 h-full bg-white z-1 transition-opacity duration-300
-             group-active:opacity-0'
+					className='absolute top-0 left-1/2 w-0.5 h-full bg-white z-1 transition-opacity duration-300 group-active:opacity-0'
 					data-image-comparison-slider=''>
 					<span
 						className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 
-               bg-[#01B5E0] text-white rounded-full flex items-center justify-center 
-               shadow-lg transition-all duration-300 scale-100 
-               group-hover:scale-120 
-               group-active:scale-90 group-active:opacity-50 z-1'
+            bg-[#01B5E0] text-white rounded-full flex items-center justify-center 
+            shadow-lg transition-all duration-300 scale-100 group-hover:scale-110 group-active:scale-95 group-active:opacity-50 z-1'
 						data-image-comparison-thumb=''>
 						<svg
 							className='w-5 h-3'
@@ -127,18 +135,18 @@ export default function CompareSliderItem({
 					</span>
 				</div>
 
+				{/* Правый слой — условно "до" */}
 				<div className='relative h-full'>
 					<figure className='relative h-full'>
-						<Image
-							width={300}
-							height={300}
-							src={`${apiUrl}${
-								work.beforeImage[0]?.formats?.large?.url ||
-								work.beforeImage[0]?.url
-							}`}
-							alt='After'
-							className='w-full h-full object-cover'
-						/>
+						{!!beforeUrl && (
+							<Image
+								width={600}
+								height={400}
+								src={toSrc(beforeUrl)}
+								alt='До'
+								className='w-full h-full object-cover'
+							/>
+						)}
 					</figure>
 				</div>
 			</div>

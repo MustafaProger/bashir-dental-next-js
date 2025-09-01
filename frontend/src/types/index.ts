@@ -62,7 +62,6 @@ export type Feedback = {
 
 export type CompareSliderItem = {
 	work: WorkItem;
-	apiUrl: string;
 	index: number;
 };
 
@@ -72,7 +71,6 @@ export type CompareSlider = {
 	loadingMore: boolean;
 	error: string | null;
 	pagination: Pagination | null;
-	apiUrl: string;
 	onLoadMore: () => void;
 };
 

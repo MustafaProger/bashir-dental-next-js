@@ -9,7 +9,6 @@ export default function CompareSlider({
 	loadingMore,
 	error,
 	pagination,
-	apiUrl,
 	onLoadMore,
 }: CompareSlider) {
 	if (loading) {
@@ -28,7 +27,6 @@ export default function CompareSlider({
 						<CompareSliderItem
 							key={work.id}
 							work={work}
-							apiUrl={apiUrl}
 							index={index}
 						/>
 					))

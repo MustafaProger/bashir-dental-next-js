@@ -30,7 +30,7 @@ export default function FeedbackContainer() {
 	const { isPending, isError, data } = useQuery({
 		queryKey: ["feedback"],
 		queryFn: () =>
-			getFeedback(process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337"),
+			getFeedback(),
 		staleTime: 1000 * 60 * 5,
 		placeholderData: keepPreviousData,
 	});

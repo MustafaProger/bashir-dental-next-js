@@ -1,13 +1,11 @@
-// src/components/CompareSlider/CompareSliderContainer.tsx
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import CompareSlider from "./CompareSlider";
 import { getWorks } from "@/services/works.api";
 import type { WorkItem, Pagination } from "@/types";
-import { motion } from "framer-motion";
 
-const BASE_URL = "http://localhost:1337";
 const PAGE_SIZE = 3;
 
 const fadeUp = {
@@ -23,7 +21,7 @@ export default function CompareSliderContainer() {
 	const q = useInfiniteQuery({
 		queryKey: ["works", { pageSize: PAGE_SIZE }],
 		queryFn: ({ pageParam = 1, signal }) =>
-			getWorks(BASE_URL, pageParam, PAGE_SIZE, { signal }),
+			getWorks(pageParam, PAGE_SIZE, { signal }),
 		initialPageParam: 1,
 		getNextPageParam: (lastPage) => {
 			const p = lastPage?.meta?.pagination;
@@ -50,7 +48,6 @@ export default function CompareSliderContainer() {
 				loadingMore={q.isFetchingNextPage}
 				error={q.isError ? (q.error as Error).message : null}
 				pagination={pagination}
-				apiUrl={BASE_URL}
 				onLoadMore={() => q.fetchNextPage()}
 			/>
 		</motion.div>
